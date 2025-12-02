@@ -15,15 +15,17 @@
             font-family: 'Inter', sans-serif;
             background-color: #f8f8f8;
             color: #333333;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
+            /* ব্যবহারকারী যেন টেক্সট সিলেক্ট করতে না পারে তার জন্য কোড */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none; /* Standard syntax */
+            -webkit-touch-callout: none; /* iOS Safari */
         }
-        input, textarea, #mail-details-content, #mail-purchase-history .font-mono, #replace-history-list .text-sm, .selectable-text {
-            -webkit-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
+        /* ইনপুট এবং নির্দিষ্ট কিছু জায়গায় সিলেকশন চালু রাখার জন্য কোড */
+        input, textarea, #mail-details-content, #mail-purchase-history .font-mono {
+            -webkit-user-select: text; /* Safari */
+            -ms-user-select: text; /* IE 10+ */
+            user-select: text; /* Standard syntax */
             -webkit-touch-callout: default;
         }
         .card-bg {
@@ -34,8 +36,8 @@
         }
         .card-bg:hover {
             border-color: rgba(0, 123, 255, 0.4);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
         .text-accent-gradient {
             background: linear-gradient(to right, #007bff, #0056b3);
@@ -76,95 +78,41 @@
 
         .bottom-nav {
              border-top: 1px solid #e0e0e0;
-             background-color: rgba(255, 255, 255, 0.95);
+             background-color: rgba(255, 255, 255, 0.9);
              backdrop-filter: blur(10px);
              -webkit-backdrop-filter: blur(10px);
              position: fixed;
              bottom: 0;
              left: 0;
              right: 0;
-             max-width: 448px;
+             max-width: 672px;
              margin: 0 auto;
              display: flex;
              justify-content: space-around;
              align-items: center;
-             padding: 8px 0;
+             padding: 12px 16px;
              z-index: 50;
-             height: 65px;
         }
-        .nav-link-native {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            color: #6b7280;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            background: none;
-            border: none;
-            width: 80px;
-        }
-        .nav-link-native.active { color: #007bff; }
-        .nav-link-native .icon { width: 26px; height: 26px; }
-
-        .header-native {
-            background-color: #007bff;
-            padding: 0.75rem;
+        .nav-link-premium { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #6b7280; font-size: 0.75rem; font-weight: 500; padding: 8px; border-radius: 12px; transition: all 0.2s ease; position: relative; cursor: pointer; background: none; border: none; }
+        .nav-link-premium:hover { color: #333333; }
+        .nav-link-premium.active { color: #007bff; }
+        .nav-link-premium .icon { width: 24px; height: 24px; }
+        .center-home-link { position: relative; transform: translateY(-20px) scale(1.1); background: rgba(0, 123, 255, 0.2); border: 1px solid rgba(0, 123, 255, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0, 123, 255, 0.4); transition: all 0.3s ease; color: #ffffff; }
+        .center-home-link:hover { transform: translateY(-20px) scale(1.15); }
+        .center-home-link .icon { width: 32px; height: 32px; color: #fff; }
+        .header {
+            border-bottom: 1px solid #e0e0e0;
+            background: linear-gradient(to right, #ffffff, #f9f9f9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem;
             position: sticky;
             top: 0;
             z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-            gap: 8px;
         }
-        .header-btn {
-            background: rgba(255,255,255,0.15);
-            border-radius: 8px;
-            padding: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .header-btn:active { background: rgba(255,255,255,0.3); }
-        
-        .notif-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 10px;
-            height: 10px;
-            background-color: #ef4444;
-            border-radius: 50%;
-            border: 2px solid #007bff;
-            display: none;
-        }
-
-        /* Full Screen Page Style for Menu & Notifications */
-        .full-screen-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8f8f8;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            animation: slideIn 0.3s ease-out;
-        }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
+        /* Banner & Marquee */
         .banner-wrapper { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
         .banner-inner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
         .slide { min-width: 100%; position: relative; }
@@ -173,6 +121,7 @@
         .dot { display: inline-block; height: 8px; width: 8px; margin: 0 4px; background: #bbb; border-radius: 50%; cursor: pointer; transition: background 0.3s; }
         .dot.active { background: #007bff; }
 
+        /* UPDATED Premium Loader Styles */
         #loader { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; transition: opacity 0.5s ease; }
         #loader .logo-container { animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards, breath 2.5s ease-in-out infinite 1s; }
         #loader .loader-text { animation: fadeInText 1s ease-in-out 0.5s forwards; opacity: 0; font-weight: bold; font-size: 1.5rem; }
@@ -181,6 +130,11 @@
         @keyframes fadeInText { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes breath { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
+        /* Review Card */
+        .review-card-new { background-color: #f9f9f9; border: 1px solid #eee; }
+        .star-rating i { color: #facc15; }
+
+        /* UPDATED Spinner for Loading */
         .premium-loader-spinner {
             width: 56px;
             height: 56px;
@@ -199,6 +153,7 @@
             to { transform: rotate(1turn); }
         }
 
+        /* New Modal Close Button Style */
         .modal-close-btn {
             position: absolute;
             top: 12px;
@@ -213,18 +168,124 @@
         .modal-close-btn:hover {
             background-color: #d1d5db;
         }
-        
-        .full-screen-header {
-            padding: 16px;
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
+
+        /* NEW: Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 9999px;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            justify-content: center;
+            border: 2px solid white;
         }
+
+        /* --- NEW: Slide-Out Menu Styles --- */
+        #menu-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 80;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        #slide-out-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 80%;
+            max-width: 320px;
+            background: #ffffff;
+            z-index: 90;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        #slide-out-menu.open {
+            transform: translateX(0);
+        }
+        .menu-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .support-link-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .support-link-card:hover {
+            background-color: #f9fafb;
+            color: #007bff;
+        }
+        .support-link-card img, .support-link-card .icon-placeholder {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* NEW: Mail Page View Switcher */
+        .mail-view-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            background-color: #e5e7eb;
+            padding: 0.5rem;
+            border-radius: 0.75rem;
+        }
+        .mail-view-switcher button {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #4b5563;
+            transition: all 0.3s ease;
+            border: none;
+            background-color: transparent;
+        }
+        .mail-view-switcher button.active {
+            background-color: #ffffff;
+            color: #007bff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- UPDATED & FIXED CSS for Mail Views --- */
+        #mail-views-container {
+            position: relative;
+            overflow: hidden;
+            /* The height will be set by JavaScript to match the active content */
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mail-view {
+            width: 100%;
+            /* Removed 'position: absolute' to allow parent to calculate height */
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute; /* Re-added with JS height management */
+            top: 0;
+            left: 0;
+        }
+
     </style>
 </head>
 <body class="max-w-md mx-auto">
@@ -238,50 +299,54 @@
         </div>
         <div id="loader-reviews">"খুবই বিশ্বস্ত একটি সাইট।" - মোঃ রায়হান</div>
     </div>
-    
+
+    <div id="menu-overlay"></div>
+    <aside id="slide-out-menu">
+        <div class="menu-header">
+            <h2 class="text-xl font-bold text-accent-gradient">Support Center</h2>
+            <p class="text-sm text-gray-500 mt-1">যেকোনো প্রয়োজনে যোগাযোগ করুন</p>
+        </div>
+        <nav id="support-channels-list" class="flex-grow overflow-y-auto">
+            </nav>
+        <div class="p-4 text-center text-xs text-gray-400 border-t">
+            𝐌𝐀𝐈𝐋 𝐒𝐓𝐎𝐑𝐄 &copy; 2025
+        </div>
+    </aside>
     <div id="app-container" class="min-h-screen flex-col main-page">
-        
-        <header class="header-native">
-            <div id="header-profile-area" class="relative cursor-pointer" onclick="navigateTo('profile-page')">
-                <img id="header-profile-pic" class="w-9 h-9 rounded-full border-2 border-white object-cover" src="" alt="Profile" loading="lazy">
-                <div id="header-initials-avatar" class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center border-2 border-white hidden">
-                    <span id="header-initials" class="text-sm font-bold text-gray-600"></span>
+        <!-- =========== HEADER (UPDATED) =========== -->
+        <header class="header flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="relative">
+                    <img id="header-profile-pic" class="w-12 h-12 rounded-full border-2 border-blue-300 object-cover hidden" src="" alt="Profile Picture">
+                    <div id="header-initials-avatar" class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center border-2 border-blue-300"><span id="header-initials" class="text-xl font-bold text-gray-500"></span></div>
+                </div>
+                <div>
+                    <h1 id="header-welcome-name" class="text-lg font-bold text-gray-800">Welcome!</h1>
+                    <p id="header-balance-display" class="font-semibold text-gray-700 text-sm">৳0.00</p>
                 </div>
             </div>
-
-            <button id="header-deposit-btn" class="header-btn" title="Deposit">
-                <i data-lucide="plus" class="w-5 h-5 text-white"></i>
-            </button>
-
-            <div id="header-balance-area" class="bg-white/20 rounded-full px-3 py-1 flex items-center gap-1 cursor-pointer flex-grow justify-center" title="Withdraw">
-                <i data-lucide="circle-dollar-sign" class="w-4 h-4 text-yellow-300"></i>
-                <span id="header-coin-balance" class="font-bold text-sm text-white">0.00</span>
-            </div>
-
-            <div class="relative">
-                <button id="header-notif-btn" class="header-btn">
-                    <i data-lucide="bell" class="w-5 h-5 text-white"></i>
+            <div class="flex items-center space-x-2">
+                <button id="header-deposit-btn" class="btn-gradient px-4 py-2 rounded-full text-sm font-bold shadow-lg">Deposit</button>
+                <button id="notification-btn" class="relative p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                    <i data-lucide="bell" class="w-5 h-5 text-gray-700"></i>
+                    <span id="notification-badge" class="notification-badge hidden">0</span>
                 </button>
-                <div id="notif-dot" class="notif-badge"></div>
+                <button id="hamburger-menu-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5 text-gray-700"></i>
+                </button>
             </div>
-
-            <button id="header-menu-btn" class="header-btn" title="Menu">
-                <i data-lucide="layout-grid" class="w-5 h-5 text-white"></i>
-            </button>
-
-            <button id="header-help-btn" class="header-btn" title="Help">
-                <i data-lucide="help-circle" class="w-5 h-5 text-white"></i>
-            </button>
         </header>
+        <!-- =========== END OF HEADER =========== -->
+
 
         <main class="flex-grow pb-20">
             <div id="home-page" class="space-y-6 sub-page">
                 <div class="p-4">
                     <div class="banner-wrapper">
                         <div class="banner-inner" id="slides">
-                            <div class="slide active"><a href="https://t.me/EXPERTearn_team" target="_blank"><img src="https://i.postimg.cc/zBp8rCX9/Yellow-Orange-Modern-Marketing-Courses-You-Tube-Thumbnail-20250910-185659-0000.png" alt="Slide 1" loading="lazy"></a></div>
-                            <div class="slide"><a href="https.t.me/EXPERTearn_team" target="_blank"><img src="https://i.postimg.cc/W1syFD8p/Grey-Blue-Illustration-Refer-a-Friend-Instagram-Post-1080-x-720-px-20250917-223749-0000.png" alt="Slide 2" loading="lazy"></a></div>
-                            <div class="slide"><a href="https://t.me/EXPERTearn_team" target="_blank"><img src="https://i.postimg.cc/52HsFwvV/Black-and-Orange-Money-You-Tube-Thumbnail-20250917-224706-0000.png" alt="Slide 3" loading="lazy"></a></div>
+                            <div class="slide active"><a href="https://t.me/EXPERTearn_team" target="_blank"><img src="https://i.postimg.cc/zBp8rCX9/Yellow-Orange-Modern-Marketing-Courses-You-Tube-Thumbnail-20250910-185659-0000.png" alt="Slide 1"></a></div>
+                            <div class="slide"><a href="https.t.me/EXPERTearn_team" target="_blank"><img src="https://i.postimg.cc/W1syFD8p/Grey-Blue-Illustration-Refer-a-Friend-Instagram-Post-1080-x-720-px-20250917-223749-0000.png" alt="Slide 2"></a></div>
+                            <div class="slide"><a href="https://t.me/EXPERTearn_team" target="_blank"><img src="https://i.postimg.cc/52HsFwvV/Black-and-Orange-Money-You-Tube-Thumbnail-20250917-224706-0000.png" alt="Slide 3"></a></div>
                         </div>
                         <div class="dots" id="dots"></div>
                     </div>
@@ -298,6 +363,7 @@
                 </div>
             </div>
             
+            <!-- =========== [UPDATED] DEPOSIT PAGE =========== -->
             <div id="pay-page" class="p-4 space-y-6 sub-page">
                 <h2 class="text-2xl font-bold text-center text-accent-gradient">Deposit Center</h2>
 
@@ -307,27 +373,53 @@
                         <p class="text-sm text-gray-500 mt-1">আপনার পছন্দমত মাধ্যমে টাকা পাঠান</p>
                     </div>
 
+                    <!-- How to Deposit Steps -->
+                    <div class="space-y-3 pt-3">
+                         <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">মাধ্যম বাছাই করুন</h4>
+                                <p class="text-sm text-gray-500">নিচের তালিকা থেকে আপনার পছন্দের মাধ্যম বেছে নিন।</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">সেন্ড মানি করুন</h4>
+                                <p class="text-sm text-gray-500">প্রদর্শিত নম্বরে আপনার কাঙ্খিত পরিমাণ টাকা <span class="font-bold text-red-600 bg-red-100 px-1 rounded">সেন্ড মানি (Send Money)</span> করুন।</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">ফর্ম পূরণ করুন</h4>
+                                <p class="text-sm text-gray-500">টাকা পাঠানোর পর Transaction ID সহ নিচের ফর্মটি সঠিকভাবে পূরণ করুন।</p>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="grid grid-cols-2 gap-4 pt-4">
                         <div class="bg-white p-3 rounded-lg text-center border hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-md">
-                            <img src="https://i.postimg.cc/Jh9s6jWw/20250922-113350.png" alt="Nagad" class="w-10 h-10 rounded-full mx-auto mb-2" loading="lazy">
+                            <img src="https://i.postimg.cc/Jh9s6jWw/20250922-113350.png" alt="Nagad" class="w-10 h-10 rounded-full mx-auto mb-2">
                             <p class="font-bold text-md">নগদ</p>
                             <p class="text-gray-600 font-mono tracking-wider text-sm my-1">01864260513</p>
                             <button onclick="copyToClipboard('01864260513', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button>
                         </div>
                         <div class="bg-white p-3 rounded-lg text-center border hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-md">
-                            <img src="https://i.postimg.cc/tCwGVkdH/20250922-113514.png" alt="bKash" class="w-10 h-10 rounded-full mx-auto mb-2" loading="lazy">
+                            <img src="https://i.postimg.cc/tCwGVkdH/20250922-113514.png" alt="bKash" class="w-10 h-10 rounded-full mx-auto mb-2">
                             <p class="font-bold text-md">বিকাশ</p>
                             <p class="text-gray-600 font-mono tracking-wider text-sm my-1">01827750260</p>
                             <button onclick="copyToClipboard('01827750260', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button>
                         </div>
                         <div class="bg-white p-3 rounded-lg text-center border hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-md">
-                            <img src="https://i.postimg.cc/htsw10Tj/20250922-113924.png" alt="Rocket" class="w-10 h-10 rounded-full mx-auto mb-2" loading="lazy">
+                            <img src="https://i.postimg.cc/htsw10Tj/20250922-113924.png" alt="Rocket" class="w-10 h-10 rounded-full mx-auto mb-2">
                             <p class="font-bold text-md">রকেট</p>
                             <p class="text-gray-600 font-mono tracking-wider text-sm my-1">018277502604</p>
                             <button onclick="copyToClipboard('018277502604', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy</span></button>
                         </div>
                         <div class="bg-white p-3 rounded-lg text-center border hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-md">
-                            <img src="https://i.postimg.cc/L6LFLfxY/20250922-113752.png" alt="Binance Pay" class="w-10 h-10 rounded-full mx-auto mb-2" loading="lazy">
+                            <img src="https://i.postimg.cc/L6LFLfxY/20250922-113752.png" alt="Binance Pay" class="w-10 h-10 rounded-full mx-auto mb-2">
                             <p class="font-bold text-md">Binance Pay</p>
                             <p class="text-gray-600 font-mono tracking-wider text-sm my-1">1105989483</p>
                             <button onclick="copyToClipboard('1105989483', this)" class="w-full text-xs p-1 mt-1 bg-gray-200 rounded hover:bg-gray-300 transition-colors flex items-center justify-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i><span>Copy ID</span></button>
@@ -345,83 +437,21 @@
                 </div>
                 <div class="mt-6"><h3 class="text-lg font-semibold mb-3">Payment History</h3><div id="payment-history-list" class="space-y-3"></div></div>
             </div>
+            <!-- =========== END OF DEPOSIT PAGE =========== -->
 
-            <div id="withdraw-page" class="p-4 space-y-6 sub-page">
-                <div class="relative flex items-center justify-center mb-4">
-                    <button onclick="navigateTo('home-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                    </button>
-                    <h2 class="text-xl font-bold text-center text-gray-800">Withdraw Balance</h2>
-                </div>
 
-                <div class="card-bg p-5 rounded-2xl shadow-lg space-y-5">
-                     <div class="text-center">
-                        <h3 class="font-semibold text-xl flex items-center justify-center gap-2 text-gray-800"><i data-lucide="wallet" class="w-6 h-6 text-blue-500"></i><span>টাকা উত্তোলন</span></h3>
-                        <p class="text-sm text-gray-500 mt-1">আপনার বিকাশ বা নগদ নম্বর দিন</p>
-                    </div>
-                    <div class="space-y-4">
-                        <div>
-                            <label for="withdraw-method" class="block text-sm font-medium text-gray-600 mb-2">উত্তোলন মাধ্যম</label>
-                            <select id="withdraw-method" class="w-full p-3 rounded-lg input-field">
-                                <option value="">Select Method</option>
-                                <option value="bKash">bKash</option>
-                                <option value="Nagad">Nagad</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="withdraw-number" class="block text-sm font-medium text-gray-600 mb-2">আপনার নম্বর</label>
-                            <input id="withdraw-number" type="text" placeholder="01xxxxxxxxx" class="w-full p-3 rounded-lg input-field">
-                        </div>
-                        <div>
-                            <label for="withdraw-amount" class="block text-sm font-medium text-gray-600 mb-2">টাকার পরিমাণ (BDT)</label>
-                            <input id="withdraw-amount" type="number" placeholder="Minimum 100" class="w-full p-3 rounded-lg input-field">
-                        </div>
-                        <button id="submit-withdraw-btn" class="w-full p-3 rounded-lg btn-gradient">Submit Withdraw Request</button>
-                    </div>
-                </div>
-
-                <div class="mt-6">
-                    <h3 class="text-lg font-semibold mb-3">Withdraw History</h3>
-                    <div id="withdraw-history-list" class="space-y-3"></div>
-                </div>
-            </div>
-
-            <div id="earn-page" class="p-4 space-y-6 sub-page">
-                <h2 class="text-2xl font-bold text-center text-accent-gradient">Start Earning</h2>
-                
-                <!-- Naval Coin Section -->
-                <div class="card-bg p-5 rounded-xl flex justify-between items-center shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 shadow-inner">
-                             <i data-lucide="coins" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">NAVAL COIN</h3>
-                            <p class="text-xs text-gray-500">Rate: 1K = 10 Taka</p>
-                        </div>
-                    </div>
-                    <button onclick="openNavalSell()" class="btn-gradient px-6 py-2.5 rounded-lg text-sm shadow-md">SELL</button>
-                </div>
-
-                <!-- Instagram Section -->
-                <div class="card-bg p-5 rounded-xl flex justify-between items-center shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 shadow-inner">
-                             <i data-lucide="instagram" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">INSTAGRAM</h3>
-                            <p class="text-xs text-gray-500">Sell Account</p>
-                        </div>
-                    </div>
-                    <button onclick="openInstagramSell()" class="btn-gradient px-6 py-2.5 rounded-lg text-sm shadow-md">SELL</button>
-                </div>
-            </div>
-
+            <!-- =========== UPDATED MAIL PAGE =========== -->
             <div id="mail-page" class="sub-page">
                 <div class="p-4 space-y-6">
-                    <h2 class="text-xl font-bold text-gray-800">Available Products</h2>
-                    <div id="mail-list-container" class="space-y-4 min-h-[200px]"></div>
+                    <div class="mail-view-switcher">
+                        <button id="login-mail-btn" class="active">LOGIN MAIL</button>
+                        <button id="otp-mail-btn">OTP MAIL</button>
+                    </div>
+
+                    <div id="mail-views-container">
+                        <div id="login-mail-container" class="mail-view space-y-4"></div>
+                        <div id="otp-mail-container" class="mail-view space-y-4"></div>
+                    </div>
                     
                     <div class="mt-8">
                         <div class="flex justify-between items-center mb-3">
@@ -435,11 +465,32 @@
                     </div>
                 </div>
             </div>
-            
+            <!-- =========== END OF UPDATED MAIL PAGE =========== -->
+
+
+            <!-- =========== UPDATED UPDATES PAGE =========== -->
+            <div id="updates-page" class="p-4 space-y-6 sub-page">
+                <h2 class="text-xl font-bold text-center text-gray-800">Latest Update</h2>
+                <div id="updates-content" class="space-y-4"></div>
+
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold text-center mb-4 text-gray-800">Customer Reviews</h3>
+                    <div id="reviews-list" class="space-y-4"></div>
+                </div>
+            </div>
+            <!-- =========== END OF UPDATED UPDATES PAGE =========== -->
+
+
+            <div id="tutorial-page" class="p-4 space-y-6 sub-page">
+                <h2 class="text-xl font-bold text-center text-gray-800">Tutorials</h2>
+                <p class="text-sm text-gray-600 text-center">নিচের তালিকা থেকে আপনার প্রয়োজনীয় ভিডিওটি দেখুন।</p>
+                <div id="tutorial-list" class="space-y-5"></div>
+            </div>
+
             <div id="profile-page" class="p-4 space-y-6 sub-page">
                 <div class="card-bg p-6 rounded-2xl flex flex-col items-center text-center">
                     <div class="relative mb-4">
-                        <img id="profile-pic" class="w-24 h-24 rounded-full border-2 border-[#007bff] object-cover" src="" alt="Profile Picture" loading="lazy">
+                        <img id="profile-pic" class="w-24 h-24 rounded-full border-2 border-[#007bff] object-cover" src="" alt="Profile Picture">
                         <div id="profile-initials-avatar" class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center border-2 border-[#007bff] hidden"><span id="profile-initials" class="text-3xl font-bold text-gray-500"></span></div>
                     </div>
                     <h3 id="profile-name" class="text-2xl font-bold text-gray-800">Loading...</h3>
@@ -452,38 +503,19 @@
                         <span>⚡ More Features</span>
                         <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400"></i>
                     </button>
-                    <button id="go-to-replace-list-btn" class="w-full card-bg p-4 rounded-xl flex justify-between items-center text-left text-lg font-semibold">
+                    <button id="go-to-support-btn" class="w-full card-bg p-4 rounded-xl flex justify-between items-center text-left text-lg font-semibold">
                         <span class="flex items-center gap-3">
-                            <i data-lucide="history" class="w-6 h-6 text-gray-600"></i>
-                            <span>Replace History</span>
-                        </span>
-                        <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400"></i>
-                    </button>
-                    
-                    <!-- NEW EARN HISTORY BUTTON -->
-                    <button id="go-to-earn-history-btn" class="w-full card-bg p-4 rounded-xl flex justify-between items-center text-left text-lg font-semibold">
-                        <span class="flex items-center gap-3">
-                            <i data-lucide="scroll-text" class="w-6 h-6 text-gray-600"></i>
-                            <span>EARN HISTORY</span>
+                            <i data-lucide="headphones" class="w-6 h-6 text-gray-600"></i>
+                            <span>Support Team</span>
                         </span>
                         <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400"></i>
                     </button>
                 </div>
+
 
                 <div class="text-center pt-6">
                      <p class="text-center text-gray-600 text-sm">Developed by <a href="https://t.me/bd_Storebot/Botshop" target="_blank" class="font-semibold text-[#007bff] hover:underline">𝐁𝐃 𝐒𝐓𝐎𝐑𝐄</a></p>
                 </div>
-            </div>
-
-            <!-- NEW EARN HISTORY SUB-PAGE -->
-            <div id="earn-history-page" class="p-4 space-y-6 sub-page">
-                <div class="relative flex items-center justify-center mb-4">
-                    <button onclick="navigateTo('profile-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                    </button>
-                    <h2 class="text-xl font-bold text-center text-gray-800">Earn History</h2>
-                </div>
-                <div id="earn-history-list" class="space-y-3"></div>
             </div>
 
             <div id="features-page" class="p-4 space-y-8 sub-page">
@@ -522,26 +554,13 @@
                     <button id="add-mails-btn" class="w-full p-3 rounded-lg btn-gradient">Add Mails to Stock</button>
                 </div>
 
+                <!-- NEW: Replace Requests Section for Admin -->
                 <div class="mt-8">
                     <h3 class="text-lg font-semibold mb-3 text-center">Replace Requests</h3>
                     <div id="replace-requests-list" class="space-y-3"></div>
                 </div>
+            </div>
 
-                <div class="mt-8">
-                    <h3 class="text-lg font-semibold mb-3 text-center">Earn Requests</h3>
-                    <div id="earn-requests-list" class="space-y-3"></div>
-                </div>
-            </div>
-            
-            <div id="replace-list-page" class="p-4 space-y-6 sub-page">
-                <div class="relative flex items-center justify-center mb-4">
-                    <button onclick="navigateTo('profile-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                    </button>
-                    <h2 class="text-xl font-bold text-center text-gray-800">My Replace History</h2>
-                </div>
-                <div id="replace-history-list" class="space-y-3"></div>
-            </div>
             <div id="link-team-page" class="p-4 space-y-6 sub-page">
                 <div class="relative flex items-center justify-center mb-4">
                     <button onclick="navigateTo('features-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
@@ -568,6 +587,7 @@
                     <div id="linked-friends-list" class="space-y-3"></div>
                 </div>
             </div>
+
 
             <div id="send-page" class="p-4 space-y-6 sub-page">
                 <div class="relative flex items-center justify-center mb-4">
@@ -597,137 +617,34 @@
             </div>
 
         </main>
-        
+
         <nav class="bottom-nav">
-            <a href="#" class="nav-link-native" data-page="home-page">
-                <i data-lucide="home" class="icon"></i>
-                <span>HOME</span>
-            </a>
-            <a href="#" class="nav-link-native" data-page="earn-page">
-                <i data-lucide="rocket" class="icon"></i>
-                <span>EARN</span>
-            </a>
-            <a href="#" class="nav-link-native" data-page="mail-page">
-                <i data-lucide="shopping-cart" class="icon"></i>
-                <span>BUY</span>
-            </a>
-            <a href="#" class="nav-link-native" data-page="profile-page">
-                <i data-lucide="user" class="icon"></i>
-                <span>PROFILE</span>
-            </a>
-            <a href="#" id="admin-nav-link" class="nav-link-native hidden" data-page="admin-page"><i data-lucide="shield" class="icon"></i><span>ADMIN</span></a>
+            <a href="#" class="nav-link-premium" data-page="updates-page"><i data-lucide="bell" class="icon"></i><span>Updates</span></a>
+            <a href="#" class="nav-link-premium" data-page="tutorial-page"><i data-lucide="video" class="icon"></i><span>Tutorial</span></a>
+            <a href="#" class="nav-link-premium center-home-link active" data-page="home-page"><i data-lucide="home" class="icon"></i></a>
+            <a href="#" class="nav-link-premium" data-page="mail-page"><i data-lucide="mail" class="icon"></i><span>Mail</span></a>
+            <a href="#" class="nav-link-premium" data-page="profile-page"><i data-lucide="user" class="icon"></i><span>Profile</span></a>
+            <a href="#" id="admin-nav-link" class="nav-link-premium hidden" data-page="admin-page"><i data-lucide="shield" class="icon"></i><span>Admin</span></a>
         </nav>
     </div>
 
-    <!-- FULL SCREEN MENU PAGE -->
-    <div id="menu-page" class="full-screen-page hidden">
-        <div class="full-screen-header">
-            <h2 class="text-xl font-bold text-gray-800">Menu</h2>
-            <button onclick="document.getElementById('menu-page').classList.add('hidden')" class="p-2 rounded-full hover:bg-gray-200">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-        </div>
-        <div class="p-4 space-y-4 flex flex-col items-center justify-center flex-grow">
-             <h3 class="text-lg font-semibold text-gray-700 mb-4">Support Team</h3>
-             <div id="support-links-container" class="w-full space-y-3 max-w-xs">
-                 <!-- Links loaded dynamically -->
-                 <p class="text-center text-gray-500">Loading support links...</p>
-             </div>
-             <p class="text-xs text-gray-400 mt-8">Developed by BD STORE</p>
-        </div>
-    </div>
-
-    <!-- FULL SCREEN NOTIFICATION PAGE -->
-    <div id="notification-page" class="full-screen-page hidden">
-         <div class="full-screen-header">
-            <h2 class="text-xl font-bold text-gray-800">Notifications</h2>
-            <button onclick="closeNotifications()" class="p-2 rounded-full hover:bg-gray-200">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-        </div>
-        <div id="notification-list" class="p-4 space-y-3 overflow-y-auto flex-grow">
-            <!-- Notifications loaded here -->
-        </div>
-    </div>
-
-
-    <!-- INSTAGRAM SELL MODAL -->
-    <div id="instagram-sell-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
-        <div class="card-bg rounded-2xl p-6 w-full max-w-sm space-y-4 relative">
-            <button onclick="document.getElementById('instagram-sell-modal').classList.add('hidden')" class="modal-close-btn">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <h3 class="text-xl font-bold text-center text-accent-gradient">Sell Instagram</h3>
-            <p class="text-center text-sm font-bold text-green-600" id="insta-rate-display">Rate: Loading...</p>
-            
-            <div class="space-y-3">
-                <input id="insta-username" type="text" placeholder="Instagram Username" class="w-full p-3 rounded-lg input-field">
-                <input id="insta-password" type="text" placeholder="Password" class="w-full p-3 rounded-lg input-field">
-                <input id="insta-email" type="text" placeholder="Email (if any)" class="w-full p-3 rounded-lg input-field">
-                <button onclick="handleInstagramSubmit()" class="w-full p-3 rounded-lg btn-gradient mt-2">Submit Account</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- NAVAL COIN SELL MODAL -->
-    <div id="naval-sell-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
-        <div class="card-bg rounded-2xl p-6 w-full max-w-sm space-y-4 relative">
-            <button onclick="document.getElementById('naval-sell-modal').classList.add('hidden')" class="modal-close-btn">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <h3 class="text-xl font-bold text-center text-accent-gradient">Sell Naval Coin</h3>
-            <p class="text-center text-sm text-gray-600">Send coins to the ID below:</p>
-            
-            <div class="bg-yellow-50 p-3 rounded-lg flex justify-between items-center">
-                <span id="naval-target-id" class="font-mono font-bold text-lg tracking-wider text-gray-800">...</span>
-                <button onclick="copyToClipboard(document.getElementById('naval-target-id').textContent, this)" class="p-2 rounded bg-white border shadow-sm"><i data-lucide="copy" class="w-4 h-4"></i></button>
-            </div>
-
-            <p class="text-center text-xs font-bold text-orange-600">Rate: 1K Coin = 10 Taka</p>
-            
-            <div class="space-y-3 mt-2">
-                <input id="naval-sender-id" type="text" placeholder="Your Send ID" class="w-full p-3 rounded-lg input-field">
-                <input id="naval-amount" type="number" placeholder="Coin Amount (e.g. 1000)" class="w-full p-3 rounded-lg input-field">
-                <button onclick="handleNavalSubmit()" class="w-full p-3 rounded-lg btn-gradient mt-2">Submit Coin Info</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- UPDATED HOW TO EARN MODAL -->
-    <div id="how-to-earn-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
-        <div class="card-bg rounded-2xl p-6 w-full max-w-sm space-y-4 relative">
-            <button id="how-to-earn-close-btn" class="modal-close-btn">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <h3 class="text-xl font-bold text-center text-accent-gradient">সহায়িকা</h3>
-            <div class="text-gray-700 space-y-4 text-sm max-h-80 overflow-y-auto">
-                <div>
-                    <h4 class="font-semibold text-gray-800 mb-1 flex items-center gap-2"><i data-lucide="dollar-sign" class="w-4 h-4 text-blue-500"></i>কীভাবে ইনকাম করবেন?</h4>
-                    <p>EARN পেজে যান এবং উপলব্ধ টাস্ক (যেমন: মেইল সেল, সোশ্যাল মিডিয়া টাস্ক) সম্পন্ন করুন।</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 mb-1 flex items-center gap-2"><i data-lucide="plus-circle" class="w-4 h-4 text-green-500"></i>কীভাবে ডিপোজিট করবেন?</h4>
-                    <p>হেডারের <span class="font-bold text-blue-600">'+'</span> আইকনে ক্লিক করুন। পেমেন্ট মাধ্যম নির্বাচন করুন, টাকা পাঠান এবং TrxID দিয়ে সাবমিট করুন।</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 mb-1 flex items-center gap-2"><i data-lucide="arrow-up-circle" class="w-4 h-4 text-yellow-500"></i>কীভাবে উইথড্র করবেন?</h4>
-                    <p>হেডারে আপনার <span class="font-bold text-yellow-600">ব্যালেন্স</span>-এর উপর ক্লিক করুন। উইথড্র পেজে বিকাশ/নগদ নম্বর ও টাকার পরিমাণ দিয়ে সাবমিট করুন।</p>
-                </div>
-                 <div class="pt-3 border-t">
-                    <p class="text-xs text-center">যেকোনো প্রয়োজনে মেনু বাটন থেকে সাপোর্টে যোগাযোগ করুন।</p>
-                </div>
-            </div>
-            <button id="how-to-earn-ok-btn" class="w-full p-3 rounded-lg btn-gradient mt-4">ঠিক আছে</button>
-        </div>
-    </div>
-
-
+    <!-- Modals -->
     <div id="custom-alert" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
         <div class="bg-white rounded-lg p-6 w-full max-w-sm text-center border border-gray-200 text-gray-800">
             <p id="alert-message" class="mb-5 whitespace-pre-wrap text-gray-700"></p>
             <button id="alert-ok-btn" class="btn-gradient px-8 py-2 rounded-lg">OK</button>
         </div>
     </div>
+
+    <div id="notification-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
+        <div class="card-bg rounded-2xl p-6 w-full max-w-sm space-y-4">
+            <h3 class="text-xl font-bold text-center text-accent-gradient mb-4">Notifications</h3>
+            <div id="notification-list" class="space-y-3 max-h-80 overflow-y-auto">
+                </div>
+            <button id="notification-ok-btn" class="w-full p-3 rounded-lg btn-gradient mt-4">Close</button>
+        </div>
+    </div>
+
 
     <div id="deposit-details-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
         <div class="card-bg rounded-2xl p-6 w-full max-w-sm space-y-4">
@@ -791,10 +708,11 @@
             </div>
 
             <p class="text-xs text-gray-500 text-center pt-2">এই তথ্য আপনার ক্রয় হিস্টিতে সেভ করা হয়েছে।</p>
-            <button id="purchase-success-details-btn" class="w-full p-3 rounded-lg btn-gradient mt-4">MORE DETAILS</button>
+            <button id="purchase-success-buy-again-btn" class="w-full p-3 rounded-lg btn-gradient mt-4">আবার কিনুন</button>
         </div>
     </div>
     
+    <!-- [UPDATED] Report Issue Modal -->
     <div id="report-issue-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[70] p-4 backdrop-blur-sm">
         <div class="card-bg rounded-2xl p-6 w-full max-w-sm space-y-4 relative">
             <button onclick="document.getElementById('report-issue-modal').classList.add('hidden')" class="modal-close-btn">
@@ -833,14 +751,15 @@
 
     <script type="module">
         const ADMIN_UID = "6954647230";
+        // --- UPDATED FIREBASE CONFIG ---
         const firebaseConfig = {
-            apiKey: "AIzaSyD856qtFfeP-_NJKCzwhfzFMo7ghUuXdLU",
-            authDomain: "instagramfarmer-58008.firebaseapp.com",
-            databaseURL: "https://instagramfarmer-58008-default-rtdb.firebaseio.com",
-            projectId: "instagramfarmer-58008",
-            storageBucket: "instagramfarmer-58008.firebasestorage.app",
-            messagingSenderId: "1030789650144",
-            appId: "1:1030789650144:web:5add8042fdd69397c92285"
+            apiKey: "AIzaSyCoCy08FL_sHHdA0f2cJg0BaF-iYAhFuk0",
+            authDomain: "mail-store-4692b.firebaseapp.com",
+            databaseURL: "https://mail-store-4692b-default-rtdb.firebaseio.com",
+            projectId: "mail-store-4692b",
+            storageBucket: "mail-store-4692b.firebasestorage.app",
+            messagingSenderId: "264936867411",
+            appId: "1:264936867411:web:5933919e5bafae617968a6"
         };
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
@@ -907,6 +826,7 @@
             }, 4000);
         }
         
+        // [UPDATED] User session initialization with unblocking logic
         async function initUserSession() {
             if (!currentUserTg) {
                 showAlert("Telegram user data is missing. Cannot proceed.");
@@ -919,6 +839,7 @@
             if (userSnap.exists()) {
                 userData = userSnap.data();
                 
+                // Check if user is currently blocked and if the block has expired
                 if (userData.isBlocked && userData.blockedUntil && userData.blockedUntil.toMillis() < Date.now()) {
                     await updateDoc(userRef, {
                         isBlocked: false,
@@ -927,6 +848,7 @@
                         photo_url: currentUserTg.photo_url || null,
                         lastSeen: serverTimestamp()
                     });
+                    // Re-fetch user data after unblocking
                     userSnap = await getDoc(userRef);
                     userData = userSnap.data();
                 } else {
@@ -948,8 +870,8 @@
                     balance: 0,
                     createdAt: serverTimestamp(),
                     isBlocked: false,
-                    blockedUntil: null, 
-                    dailyRejections: { date: new Date().toISOString().slice(0, 10), count: 0 },
+                    blockedUntil: null, // For timed blocks
+                    dailyRejections: { date: new Date().toISOString().slice(0, 10), count: 0 }, // For tracking rejected reports
                     lastSeenNotification: null,
                     linkedUsers: [], 
                     linkedBy: null, 
@@ -970,42 +892,46 @@
                 document.getElementById('admin-nav-link').classList.remove('hidden');
             }
 
+            loadSupportMenu();
             updateUI();
             listenForNotifications();
             showMainPage('app-container');
             navigateTo('home-page');
         }
 
+
         async function fetchAppConfig() {
             const configRef = doc(db, "config", "main");
             const configSnap = await getDoc(configRef);
-            appConfig = configSnap.exists() ? configSnap.data() : { mails: [], support: {} };
+            appConfig = configSnap.exists() ? configSnap.data() : { mails: [] };
         }
         
         function updateHeaderUI() {
             if (!currentUserTg) return;
             const profilePic = document.getElementById('header-profile-pic');
             const avatarDiv = document.getElementById('header-initials-avatar');
-            
+            const welcomeName = document.getElementById('header-welcome-name');
+
             if (userData.photo_url) {
                 profilePic.src = userData.photo_url;
                 profilePic.classList.remove('hidden');
                 avatarDiv.classList.add('hidden');
             } else {
                 const initials = (currentUserTg.first_name?.[0] || '') + (currentUserTg.last_name?.[0] || '');
-                document.getElementById('header-initials').textContent = initials.toUpperCase() || 'U';
+                document.getElementById('header-initials').textContent = initials.toUpperCase();
                 profilePic.classList.add('hidden');
                 avatarDiv.classList.remove('hidden');
             }
+            
+            const firstName = currentUserTg.first_name || 'User';
+            welcomeName.textContent = `Hi, ${firstName}!`;
         }
 
         function updateUI() {
             if (!userData) return;
-            const balance = Math.floor(userData.balance || 0);
-            const balanceFormatted = (userData.balance || 0).toFixed(2);
-            
-            document.getElementById('balance-display').textContent = `৳${balanceFormatted}`;
-            document.getElementById('header-coin-balance').textContent = `৳${balanceFormatted}`; 
+            const balance = (userData.balance || 0).toFixed(2);
+            document.getElementById('balance-display').textContent = `৳${balance}`;
+            document.getElementById('header-balance-display').textContent = `৳${balance}`;
             updateHeaderUI();
         }
 
@@ -1022,67 +948,51 @@
 
             document.querySelectorAll('.sub-page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            
-            document.querySelectorAll('.nav-link-native[data-page]').forEach(link => {
+            document.querySelectorAll('.nav-link-premium[data-page]').forEach(link => {
                 link.classList.toggle('active', link.dataset.page === pageId);
             });
 
             const pageLoadFunctions = {
                 'home-page': () => {},
                 'pay-page': loadPaymentHistory,
-                'withdraw-page': loadWithdrawHistory,
-                'earn-page': () => {}, 
                 'mail-page': loadMailStore,
-                'admin-page': () => { populateAdminMailTypes(); loadReplaceRequests(); loadEarnRequests(); },
-                'profile-page': () => { loadProfilePage(); },
+                'updates-page': () => { loadUpdates(); loadReviews(); },
+                'admin-page': () => { populateAdminMailTypes(); loadReplaceRequests(); },
+                'profile-page': loadProfilePage,
                 'features-page': loadFeaturesPage,
+                'tutorial-page': loadTutorials,
                 'link-team-page': loadLinkedFriends,
-                'send-page': () => { setupDynamicAmountHandlers('send'); },
-                'replace-list-page': loadReplaceHistory,
-                'earn-history-page': loadEarnHistory
+                'send-page': () => { setupDynamicAmountHandlers('send'); }
             };
             if (pageLoadFunctions[pageId]) pageLoadFunctions[pageId]();
             lucide.createIcons();
         }
         window.navigateTo = navigateTo;
-        
+
+        function toggleMenu() {
+            const menu = document.getElementById('slide-out-menu');
+            const overlay = document.getElementById('menu-overlay');
+            menu.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
         function setupEventListeners() {
-            document.getElementById('header-profile-area').addEventListener('click', () => navigateTo('profile-page'));
+            document.querySelectorAll('.nav-link-premium[data-page]').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); navigateTo(link.dataset.page); }));
             document.getElementById('header-deposit-btn').addEventListener('click', () => navigateTo('pay-page'));
-            document.getElementById('header-balance-area').addEventListener('click', () => navigateTo('withdraw-page'));
-            document.getElementById('header-notif-btn').addEventListener('click', openNotifications);
-            
-            // Open Menu Full Page
-            document.getElementById('header-menu-btn').addEventListener('click', openMenuPage);
-
-            document.getElementById('header-help-btn').addEventListener('click', () => document.getElementById('how-to-earn-modal').classList.remove('hidden'));
-            
-            document.querySelectorAll('.nav-link-native[data-page]').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); navigateTo(link.dataset.page); }));
-            
-            document.getElementById('how-to-earn-close-btn').addEventListener('click', () => {
-                document.getElementById('how-to-earn-modal').classList.add('hidden');
-            });
-            document.getElementById('how-to-earn-ok-btn').addEventListener('click', () => {
-                document.getElementById('how-to-earn-modal').classList.add('hidden');
-            });
-
+            document.getElementById('notification-btn').addEventListener('click', showNotifications);
+            document.getElementById('notification-ok-btn').addEventListener('click', hideNotifications);
             document.getElementById('deposit-btn').addEventListener('click', handleDepositRequest);
-            document.getElementById('submit-withdraw-btn').addEventListener('click', handleWithdrawRequest);
-
             document.getElementById('home-deposit-btn').addEventListener('click', () => navigateTo('pay-page'));
             document.getElementById('add-mails-btn').addEventListener('click', handleAddMails);
-            
-            document.getElementById('download-history-btn').addEventListener('click', () => handleDownloadHistory('mail-purchase-history'));
-            document.getElementById('copy-history-btn').addEventListener('click', () => handleCopyHistory('mail-purchase-history'));
-            
+            document.getElementById('download-history-btn').addEventListener('click', handleDownloadHistory);
+            document.getElementById('copy-history-btn').addEventListener('click', handleCopyHistory);
             document.getElementById('deposit-details-ok-btn').addEventListener('click', () => document.getElementById('deposit-details-modal').classList.add('hidden'));
+            document.getElementById('hamburger-menu-btn').addEventListener('click', toggleMenu);
+            document.getElementById('menu-overlay').addEventListener('click', toggleMenu);
+            document.getElementById('go-to-support-btn').addEventListener('click', toggleMenu);
             
             document.getElementById('more-features-btn').addEventListener('click', handleFeaturesClick);
             
-            document.getElementById('go-to-replace-list-btn').addEventListener('click', () => navigateTo('replace-list-page'));
-            document.getElementById('go-to-earn-history-btn').addEventListener('click', () => navigateTo('earn-history-page'));
-
-
             document.getElementById('features-receive-btn').addEventListener('click', handleReceive);
             document.getElementById('features-send-btn').addEventListener('click', () => navigateTo('send-page'));
             document.getElementById('submit-send-btn').addEventListener('click', handleSendRequest);
@@ -1096,105 +1006,115 @@
             });
             document.getElementById('alert-ok-btn').addEventListener('click', () => { document.getElementById('custom-alert').classList.add('hidden'); });
 
-            document.getElementById('purchase-success-details-btn').addEventListener('click', () => {
-                const modal = document.getElementById('purchase-success-modal');
-                const pageType = modal.dataset.pageType;
-                modal.classList.add('hidden');
-                if (pageType === 'mail') {
-                    navigateTo('mail-page');
-                }
-            });
-            document.getElementById('close-purchase-success-modal').addEventListener('click', () => document.getElementById('purchase-success-modal').classList.add('hidden'));
+            const hidePurchaseSuccessModal = () => document.getElementById('purchase-success-modal').classList.add('hidden');
+            document.getElementById('purchase-success-buy-again-btn').addEventListener('click', hidePurchaseSuccessModal);
+            document.getElementById('close-purchase-success-modal').addEventListener('click', hidePurchaseSuccessModal);
+
+            document.getElementById('login-mail-btn').addEventListener('click', () => switchMailView('login'));
+            document.getElementById('otp-mail-btn').addEventListener('click', () => switchMailView('otp'));
 
             document.getElementById('report-issue-form').addEventListener('submit', handleReportSubmit);
         }
 
-        function openMenuPage() {
-            const supportContainer = document.getElementById('support-links-container');
-            supportContainer.innerHTML = '';
-            
-            const telegramLink = appConfig.support?.telegram || "https://t.me/EXPERTearn_team";
-            const whatsappLink = appConfig.support?.whatsapp || "https://wa.me/";
-            
-            supportContainer.innerHTML = `
-                <button onclick="window.Telegram.WebApp.openTelegramLink('${telegramLink}')" class="w-full card-bg p-4 rounded-xl flex items-center gap-3 hover:bg-blue-50 transition">
-                    <i data-lucide="send" class="w-6 h-6 text-blue-500"></i>
-                    <span class="font-bold text-gray-700">Telegram Support</span>
-                </button>
-                <button onclick="window.Telegram.WebApp.openLink('${whatsappLink}')" class="w-full card-bg p-4 rounded-xl flex items-center gap-3 hover:bg-green-50 transition">
-                    <i data-lucide="message-circle" class="w-6 h-6 text-green-500"></i>
-                    <span class="font-bold text-gray-700">WhatsApp Support</span>
-                </button>
-            `;
-            lucide.createIcons();
-            document.getElementById('menu-page').classList.remove('hidden');
-        }
-
-        async function openNotifications() {
-            const listEl = document.getElementById('notification-list');
-            listEl.innerHTML = getLoadingHTML();
-            document.getElementById('notification-page').classList.remove('hidden');
-            
-            try {
-                const notifQuery = query(collection(db, "notifications"), 
-                    where("recipientId", "in", [userData.tgChatId, "all"]),
-                    orderBy("createdAt", "desc"),
-                    limit(20)
-                );
-
-                const snapshot = await getDocs(notifQuery);
-                if (snapshot.empty) {
-                    listEl.innerHTML = '<p class="text-center text-gray-500 mt-4">কোনো নোটিফিকেশন নেই।</p>';
-                } else {
-                    listEl.innerHTML = snapshot.docs.map(doc => {
-                        const n = doc.data();
-                        const time = n.createdAt ? n.createdAt.toDate().toLocaleString() : '';
-                        let icon = 'info';
-                        let color = 'blue';
-                        
-                        if(n.title.includes("Approved") || n.title.includes("Success")) { icon = 'check-circle'; color = 'green'; }
-                        else if(n.title.includes("Rejected") || n.title.includes("Failed")) { icon = 'x-circle'; color = 'red'; }
-                        else if(n.title.includes("Broadcast")) { icon = 'megaphone'; color = 'orange'; }
-
-                        return `<div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                            <div class="flex items-start gap-3">
-                                <i data-lucide="${icon}" class="w-5 h-5 text-${color}-500 mt-1 flex-shrink-0"></i>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 text-sm">${n.title}</h4>
-                                    <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-                                    <p class="text-[10px] text-gray-400 mt-2">${time}</p>
-                                </div>
-                            </div>
-                        </div>`;
-                    }).join('');
-                    lucide.createIcons();
-                }
+        function adjustMailViewContainerHeight() {
+            setTimeout(() => {
+                const container = document.getElementById('mail-views-container');
+                const loginView = document.getElementById('login-mail-container');
+                const otpView = document.getElementById('otp-mail-container');
                 
-                const userRef = doc(db, "users", userData.tgChatId);
-                await updateDoc(userRef, { lastSeenNotification: serverTimestamp() });
-                document.getElementById('notif-dot').style.display = 'none';
-
-            } catch(e) {
-                console.error(e);
-                listEl.innerHTML = '<p class="text-center text-red-500">Error loading notifications.</p>';
-            }
+                const activeView = loginView.style.transform === 'translateX(0%)' ? loginView : otpView;
+                
+                if (container && activeView) {
+                    container.style.height = `${activeView.scrollHeight}px`;
+                }
+            }, 50); 
         }
+        
+        function switchMailView(view) {
+            const loginBtn = document.getElementById('login-mail-btn');
+            const otpBtn = document.getElementById('otp-mail-btn');
+            const loginContainer = document.getElementById('login-mail-container');
+            const otpContainer = document.getElementById('otp-mail-container');
 
-        window.closeNotifications = function() {
-             document.getElementById('notification-page').classList.add('hidden');
+            if (view === 'login') {
+                loginBtn.classList.add('active');
+                otpBtn.classList.remove('active');
+                loginContainer.style.transform = 'translateX(0%)';
+                otpContainer.style.transform = 'translateX(100%)';
+            } else { // otp
+                loginBtn.classList.remove('active');
+                otpBtn.classList.add('active');
+                loginContainer.style.transform = 'translateX(-100%)';
+                otpContainer.style.transform = 'translateX(0%)';
+            }
+            adjustMailViewContainerHeight();
         }
 
         function listenForNotifications() {
-            const q = query(collection(db, "notifications"), 
-                where("recipientId", "in", [userData.tgChatId, "all"]),
-                where("createdAt", ">", Timestamp.now())
-            );
-            
+            const q = query(collection(db, "notifications"), orderBy("createdAt", "desc"));
             onSnapshot(q, (snapshot) => {
-                if (!snapshot.empty) {
-                    document.getElementById('notif-dot').style.display = 'block';
+                const filteredDocs = snapshot.docs.filter(doc => {
+                    const data = doc.data();
+                    return !data.recipientId || data.recipientId === userData.tgChatId;
+                });
+
+                let unreadCount = 0;
+                const lastSeen = userData.lastSeenNotification ? userData.lastSeenNotification.toMillis() : 0;
+                
+                filteredDocs.forEach(doc => {
+                    const notification = doc.data();
+                    if (notification.createdAt.toMillis() > lastSeen) {
+                        unreadCount++;
+                    }
+                });
+
+                const badge = document.getElementById('notification-badge');
+                if (unreadCount > 0) {
+                    badge.textContent = unreadCount;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
                 }
             });
+        }
+
+        async function showNotifications() {
+            const modal = document.getElementById('notification-modal');
+            const listEl = document.getElementById('notification-list');
+            listEl.innerHTML = getLoadingHTML();
+            modal.classList.remove('hidden');
+
+            const q = query(collection(db, "notifications"), orderBy("createdAt", "desc"), limit(20));
+            const snapshot = await getDocs(q);
+
+            const filteredDocs = snapshot.docs.filter(doc => {
+                const data = doc.data();
+                return !data.recipientId || data.recipientId === userData.tgChatId;
+            });
+
+            if (filteredDocs.length === 0) {
+                listEl.innerHTML = '<p class="text-center text-gray-500">No notifications yet.</p>';
+            } else {
+                listEl.innerHTML = filteredDocs.slice(0, 10).map(doc => {
+                    const item = doc.data();
+                    const date = item.createdAt.toDate().toLocaleString('en-GB');
+                    return `<div class="p-3 bg-gray-50 rounded-lg">
+                        <p class="font-bold text-gray-800">${item.title}</p>
+                        <p class="text-sm text-gray-600">${item.message}</p>
+                        <p class="text-xs text-gray-400 text-right mt-2">${date}</p>
+                    </div>`;
+                }).join('');
+            }
+        }
+
+
+        async function hideNotifications() {
+            document.getElementById('notification-modal').classList.add('hidden');
+            const userRef = doc(db, "users", userData.tgChatId);
+            const newTimestamp = Timestamp.now();
+            await updateDoc(userRef, { lastSeenNotification: newTimestamp });
+            userData.lastSeenNotification = newTimestamp;
+            document.getElementById('notification-badge').classList.add('hidden');
         }
 
         function loadProfilePage() {
@@ -1216,42 +1136,6 @@
             }
         }
 
-        async function loadEarnHistory() {
-            const listEl = document.getElementById('earn-history-list');
-            listEl.innerHTML = getLoadingHTML();
-            try {
-                const q = query(collection(db, "earn_requests"), where("userId", "==", userData.tgChatId), orderBy("timestamp", "desc"));
-                const snapshot = await getDocs(q);
-                if (snapshot.empty) return listEl.innerHTML = '<p class="text-gray-500 text-center text-sm">No earn history found.</p>';
-                
-                listEl.innerHTML = snapshot.docs.map(doc => {
-                    const item = doc.data();
-                    const date = item.timestamp ? item.timestamp.toDate().toLocaleDateString() : '';
-                    let statusColor = 'text-yellow-600 bg-yellow-100';
-                    if(item.status === 'approved') statusColor = 'text-green-600 bg-green-100';
-                    if(item.status === 'rejected') statusColor = 'text-red-600 bg-red-100';
-                    
-                    let details = '';
-                    if(item.type === 'instagram') details = `Insta: ${item.data.username}`;
-                    else details = `Coins: ${item.data.amount}`;
-
-                    return `<div class="card-bg p-3 rounded-lg flex justify-between items-center">
-                        <div>
-                            <p class="font-bold text-gray-800 capitalize text-sm">${item.type.replace('_', ' ')}</p>
-                            <p class="text-xs text-gray-500">${details}</p>
-                            <p class="text-xs text-gray-400 mt-1">${date}</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-bold text-blue-600 text-sm">৳${item.estimatedValue.toFixed(2)}</p>
-                            <span class="text-xs px-2 py-1 rounded-full font-bold ${statusColor} capitalize inline-block mt-1">${item.status}</span>
-                        </div>
-                    </div>`;
-                }).join('');
-            } catch(e) {
-                listEl.innerHTML = '<p class="text-red-500 text-center text-sm">Failed to load history.</p>';
-            }
-        }
-
         async function handleDepositRequest() {
             const method = document.getElementById('deposit-method').value;
             const amount = parseInt(document.getElementById('deposit-amount').value);
@@ -1263,14 +1147,12 @@
             loader.style.display = 'flex';
 
             try {
-                // Check uniqueness globally for TrxID
-                const depositQuery = query(collection(db, "deposits"), where("transactionId", "==", transactionId));
+                const depositQuery = query(collection(db, "deposits"), where("transactionId", "==", transactionId), where("status", "in", ["pending", "approved"]));
                 const querySnapshot = await getDocs(depositQuery);
                 if (!querySnapshot.empty) {
                     loader.style.display = 'none';
-                    return showAlert("এই Transaction ID টি ইতিমধ্যে ব্যবহার করা হয়েছে। একটি ID মাত্র একবার ব্যবহার করা যাবে।");
+                    return showAlert("এই Transaction ID দিয়ে ইতিমধ্যে একটি ডিপোজিট অনুরোধ জমা দেওয়া হয়েছে।");
                 }
-                
                 await addDoc(collection(db, "deposits"), {
                     userId: userData.tgChatId, userName: userData.name, method: method, amount: amount,
                     senderNumber: senderNumber, transactionId: transactionId, status: "pending", requestedAt: serverTimestamp()
@@ -1280,49 +1162,6 @@
                 loadPaymentHistory();
             } catch (error) { showAlert("ডিপোজিট অনুরোধ জমা দিতে একটি সমস্যা হয়েছে।"); } 
             finally { loader.style.display = 'none'; }
-        }
-
-        async function handleWithdrawRequest() {
-            const method = document.getElementById('withdraw-method').value;
-            const number = document.getElementById('withdraw-number').value.trim();
-            const amount = parseInt(document.getElementById('withdraw-amount').value);
-
-            if (!method || !number || !amount || amount < 100) return showAlert("সঠিক তথ্য দিন। সর্বনিম্ন উইথড্র ১০০ টাকা।");
-            if (userData.balance < amount) return showAlert("অপর্যাপ্ত ব্যালেন্স।");
-
-            loader.style.display = 'flex';
-            try {
-                await runTransaction(db, async (transaction) => {
-                    const userRef = doc(db, "users", userData.tgChatId);
-                    const userDoc = await transaction.get(userRef);
-                    if (!userDoc.exists()) throw "User not found";
-                    const currentBal = userDoc.data().balance;
-                    
-                    if (currentBal < amount) throw "Insufficient Balance";
-
-                    transaction.update(userRef, { balance: currentBal - amount });
-                    transaction.set(doc(collection(db, "withdrawals")), {
-                        userId: userData.tgChatId,
-                        userName: userData.name,
-                        method: method,
-                        number: number,
-                        amount: amount,
-                        status: "pending",
-                        requestedAt: serverTimestamp()
-                    });
-                });
-
-                userData.balance -= amount;
-                updateUI();
-                showAlert("উইথড্র রিকোয়েস্ট জমা হয়েছে।");
-                ['withdraw-method', 'withdraw-number', 'withdraw-amount'].forEach(id => document.getElementById(id).value = '');
-                loadWithdrawHistory();
-
-            } catch(e) {
-                showAlert(`সমস্যা হয়েছে: ${e.message || e}`);
-            } finally {
-                loader.style.display = 'none';
-            }
         }
 
         async function loadPaymentHistory() {
@@ -1348,29 +1187,6 @@
             } catch (error) { historyList.innerHTML = '<p class="text-red-600 text-center">হিস্টি লোড করা যায়নি।</p>'; }
         }
 
-        async function loadWithdrawHistory() {
-            const historyList = document.getElementById('withdraw-history-list');
-            historyList.innerHTML = getLoadingHTML();
-            try {
-                const q = query(collection(db, "withdrawals"), where("userId", "==", userData.tgChatId), orderBy("requestedAt", "desc"));
-                const snapshot = await getDocs(q);
-                if (snapshot.empty) return historyList.innerHTML = '<p class="text-gray-600 text-center">কোনো রেকর্ড পাওয়া যায়নি।</p>';
-
-                historyList.innerHTML = snapshot.docs.map(doc => {
-                    const item = doc.data();
-                    const statusMap = {
-                        approved: { color: 'text-green-600', icon: 'check-circle-2' },
-                        rejected: { color: 'text-red-600', icon: 'x-circle' },
-                        pending: { color: 'text-yellow-600', icon: 'hourglass' }
-                    };
-                    const { color, icon } = statusMap[item.status] || statusMap.pending;
-                    const date = item.requestedAt ? item.requestedAt.toDate().toLocaleDateString('en-GB') : 'N/A';
-                    return `<div class="card-bg p-3 rounded-lg flex items-center justify-between"><div class="flex items-center gap-3"><i data-lucide="${icon}" class="w-6 h-6 ${color}"></i><div><p class="font-semibold text-gray-800">Withdraw - ${item.method}</p><p class="text-xs text-gray-500">${date}</p></div></div><div class="text-right"><p class="font-bold text-lg text-gray-800">৳${item.amount}</p><p class="font-semibold ${color} capitalize text-xs">${item.status}</p></div></div>`;
-                }).join('');
-                lucide.createIcons();
-            } catch (error) { historyList.innerHTML = '<p class="text-red-600 text-center">হিস্টি লোড করা যায়নি।</p>'; }
-        }
-
         async function getStockCount(collectionName) {
             try {
                 const q = query(collection(db, collectionName), where("isSold", "==", false));
@@ -1379,9 +1195,10 @@
             } catch (error) { console.error(`Error getting stock count for ${collectionName}:`, error); return 0; }
         }
         
-        async function renderMailList(mails, containerEl, effectiveBalance, pageType) {
+        // [UPDATED] Mail rendering logic
+        async function renderMailList(mails, containerEl, effectiveBalance) {
             if (!mails || mails.length === 0) {
-                containerEl.innerHTML = `<p class="text-center text-gray-500 pt-10">এই ক্যাটাগরিতে কোনো পণ্য উপলব্ধ নেই।</p>`;
+                containerEl.innerHTML = `<p class="text-center text-gray-500 pt-10">এই ক্যাটাগরিতে কোনো মেইল উপলব্ধ নেই।</p>`;
                 return;
             }
 
@@ -1397,13 +1214,14 @@
                 const validityTagHtml = (mail.expirationHours != null) ? `<span class="bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded-full">${mail.expirationHours}h validity</span>` : '';
                 const apiButtonHtml = mail.apiLink ? `<button onclick="openApiLink('${mail.apiLink}')" class="text-blue-600 font-semibold">API</button>` : '<span class="text-gray-400 font-semibold">API</span>';
                 
+                // Encode details and features to be passed into the modal function
                 const encodedDetails = encodeURIComponent(mail.details || '');
                 const encodedFeatures = encodeURIComponent(JSON.stringify(mail.featureList || []));
 
                 return `<div class="card-bg p-4 rounded-xl space-y-3">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center gap-3">
-                            <img src="${mail.logoUrl}" class="w-8 h-8 rounded-lg object-cover" alt="${mail.type} logo" loading="lazy">
+                            <img src="${mail.logoUrl}" class="w-8 h-8 rounded-lg object-cover" alt="${mail.type} logo">
                             <h3 class="font-bold text-lg text-gray-800">${mail.type}</h3>
                         </div>
                         <div class="flex items-center gap-2">
@@ -1417,113 +1235,21 @@
                         <div class="py-2"><p class="text-gray-500 text-sm">Price</p><p class="font-bold text-lg text-blue-600">৳${parseFloat(mail.priceBdt).toFixed(2)}</p></div>
                         <div class="py-2"><p class="text-gray-500 text-sm">Stock</p><p class="font-bold text-lg text-green-600">${mail.stock}</p></div>
                     </div>
-                    <button class="${buyButtonClasses} w-full py-2 rounded-lg text-md" ${buyButtonDisabled ? 'disabled' : ''} onclick="buyMail('${mail.type}', ${mail.priceBdt}, '${mail.stockKey}', '${pageType}')">Buy Now</button>
+                    <button class="${buyButtonClasses} w-full py-2 rounded-lg text-md" ${buyButtonDisabled ? 'disabled' : ''} onclick="buyMail('${mail.type}', ${mail.priceBdt}, '${mail.stockKey}')">Buy Now</button>
                 </div>`;
             }).join('');
             lucide.createIcons();
         }
 
-        async function loadPurchaseHistory(historyListElId, countdownIntervalVarName, formatType = 'mail') {
-            const historyListEl = document.getElementById(historyListElId);
-            historyListEl.innerHTML = getLoadingHTML();
-            
-            try {
-                const twentyFourHoursAgo = Timestamp.fromDate(new Date(Date.now() - 24 * 60 * 60 * 1000));
-                let q = query(
-                    collection(db, "mail_purchases"), 
-                    where("userId", "==", userData.tgChatId), 
-                    where("purchasedAt", ">=", twentyFourHoursAgo), 
-                    orderBy("purchasedAt", "desc")
-                );
-
-                const querySnapshot = await getDocs(q);
-
-                let purchases = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                
-                const activePurchases = purchases.filter(p => {
-                    if (p.isRefunded) return false;
-                    if (p.expirationHours && p.purchasedAt) {
-                        const expiryTime = p.purchasedAt.toDate().getTime() + (p.expirationHours * 3600000);
-                        return Date.now() < expiryTime;
-                    }
-                    return true;
-                });
-                
-                const purchaseIds = activePurchases.map(p => p.id);
-                const replaceRequestsQuery = purchaseIds.length ? query(collection(db, "replace_requests"), where("purchaseId", "in", purchaseIds)) : null;
-                const replaceSnapshot = replaceRequestsQuery ? await getDocs(replaceRequestsQuery) : { docs: [] };
-                
-                const reportStatusMap = new Map();
-                replaceSnapshot.docs.forEach(doc => {
-                    reportStatusMap.set(doc.data().purchaseId, doc.data().status);
-                });
-
-                if(activePurchases.length === 0) {
-                    historyListEl.innerHTML = '<p class="text-center text-gray-600">আপনার কোনো সক্রিয় কেনা পণ্য নেই।</p>';
-                } else {
-                    historyListEl.innerHTML = activePurchases.map(purchase => {
-                        const date = purchase.purchasedAt.toDate().toLocaleString();
-                        const countdownHtml = purchase.expirationHours ? `<div class="text-xs text-red-500 font-semibold text-right mt-1" data-purchase-id="${purchase.id}" data-purchased-at="${purchase.purchasedAt.toMillis()}" data-expires-in-hours="${purchase.expirationHours}">Expires in: --:--:--</div>` : '';
-                        
-                        const reportStatus = reportStatusMap.get(purchase.id);
-                        let reportButton;
-                        switch (reportStatus) {
-                            case 'approved': reportButton = `<button class="bg-green-100 text-green-700 text-xs px-3 py-1.5 rounded-md font-semibold flex items-center gap-1" disabled><i data-lucide="check-circle" class="w-3 h-3"></i> Refunded</button>`; break;
-                            case 'rejected': reportButton = `<button class="bg-gray-200 text-gray-600 text-xs px-3 py-1.5 rounded-md font-semibold flex items-center gap-1" disabled><i data-lucide="x-circle" class="w-3 h-3"></i> Rejected</button>`; break;
-                            case 'pending': reportButton = `<button class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1.5 rounded-md font-semibold flex items-center gap-1" disabled><i data-lucide="hourglass" class="w-3 h-3"></i> Pending</button>`; break;
-                            default: reportButton = `<button id="report-btn-${purchase.id}" onclick="showReportForm('${purchase.id}', '${purchase.mailType}', ${purchase.cost}, '${purchase.saleId}')" class="bg-orange-100 text-orange-700 text-xs px-3 py-1.5 rounded-md font-semibold hover:bg-orange-200 flex items-center gap-1"><i data-lucide="shield-alert" class="w-3 h-3"></i> Report</button>`;
-                        }
-                        
-                        let inboxButton = '';
-                        if (purchase.expirationHours) {
-                             const mailConfig = (appConfig.mails || []).find(m => m.type === purchase.mailType);
-                             if (mailConfig && mailConfig.apiLink) {
-                                inboxButton = `<button onclick="window.Telegram.WebApp.openLink('${mailConfig.apiLink}')" class="bg-blue-100 text-blue-700 text-xs px-3 py-1.5 rounded-md font-semibold hover:bg-blue-200 flex items-center gap-1"><i data-lucide="inbox" class="w-3 h-3"></i> INBOX</button>`;
-                             }
-                        }
-
-                        let detailsHtml, fullData;
-                        fullData = [purchase.mail, purchase.password, purchase.refreshToken, purchase.clientId].filter(Boolean).join('|');
-                         detailsHtml = `<div class="space-y-2 pt-2 border-t">
-                            <div class="flex items-center justify-between bg-gray-50 p-2 rounded-md"><span class="text-sm font-medium text-gray-500 mr-2">EMAIL:</span><span class="font-mono text-sm text-gray-800 truncate">${purchase.mail}</span><button onclick="copyToClipboard('${purchase.mail}', this)" class="ml-2 p-1.5 rounded-md hover:bg-gray-200"><i data-lucide="copy" class="w-4 h-4 text-gray-600"></i></button></div>
-                            <div class="flex items-center justify-between bg-gray-50 p-2 rounded-md"><span class="text-sm font-medium text-gray-500 mr-2">PASS:</span><span class="font-mono text-sm text-gray-800">${purchase.password || 'N/A'}</span><button onclick="copyToClipboard('${purchase.password || ''}', this)" class="ml-2 p-1.5 rounded-md hover:bg-gray-200"><i data-lucide="copy" class="w-4 h-4 text-gray-600"></i></button></div>
-                        </div>`;
-
-                        return `<div class="card-bg p-4 rounded-xl space-y-3">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h4 class="font-bold text-lg text-gray-800">${purchase.mailType}</h4>
-                                    <p class="text-xs text-gray-500">${date}</p>
-                                    <p class="text-xs font-mono text-blue-600 mt-1">ID: ${purchase.saleId || 'N/A'}</p>
-                                </div>
-                                <div class="flex flex-col items-end gap-2">
-                                     <div class="flex items-center gap-2">
-                                        ${inboxButton}
-                                        ${reportButton}
-                                    </div>
-                                    <button onclick="copyToClipboard(\`${fullData}\`, this)" class="bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-md font-semibold hover:bg-gray-200 flex items-center gap-1 self-end"><i data-lucide="copy-plus" class="w-3 h-3"></i> FULL COPY</button>
-                                </div>
-                            </div>
-                            ${detailsHtml}
-                            ${countdownHtml}
-                        </div>`;
-                    }).join('');
-                    
-                    if (countdownIntervalVarName === 'mail') {
-                         startCountdownTimers(historyListElId, countdownInterval);
-                    }
-                }
-                lucide.createIcons();
-                
-            } catch (error) {
-                console.error("Error loading purchase history:", error);
-                historyListEl.innerHTML = '<p class="text-center text-red-600">হিস্টি লোড করা যায়নি।</p>';
-            }
-        }
-
+        // [UPDATED] Load mail store and history with new report status logic
         async function loadMailStore() {
-            const mailListContainer = document.getElementById('mail-list-container');
-            mailListContainer.innerHTML = getLoadingHTML();
+            const loginMailContainer = document.getElementById('login-mail-container');
+            const otpMailContainer = document.getElementById('otp-mail-container');
+            const historyListEl = document.getElementById('mail-purchase-history');
+            
+            loginMailContainer.innerHTML = getLoadingHTML();
+            otpMailContainer.innerHTML = getLoadingHTML();
+            historyListEl.innerHTML = getLoadingHTML();
             
             try {
                 const userSnap = await getDoc(doc(db, "users", userData.tgChatId));
@@ -1536,26 +1262,82 @@
                 }
 
                 const allMails = appConfig.mails || [];
+                const loginMails = allMails.filter(m => m.category === 'login' || !m.category);
                 const otpMails = allMails.filter(m => m.category === 'otp');
 
-                await renderMailList(otpMails, mailListContainer, effectiveBalance, 'mail');
-                await loadPurchaseHistory('mail-purchase-history', 'mail', 'mail');
+                await Promise.all([
+                    renderMailList(loginMails, loginMailContainer, effectiveBalance),
+                    renderMailList(otpMails, otpMailContainer, effectiveBalance)
+                ]);
+                
+                switchMailView('login');
+
+                const twentyFourHoursAgo = Timestamp.fromDate(new Date(Date.now() - 24 * 60 * 60 * 1000));
+                const q = query(collection(db, "mail_purchases"), where("userId", "==", userData.tgChatId), where("purchasedAt", ">=", twentyFourHoursAgo), orderBy("purchasedAt", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                const purchaseIds = querySnapshot.docs.map(d => d.id);
+                const replaceRequestsQuery = purchaseIds.length ? query(collection(db, "replace_requests"), where("purchaseId", "in", purchaseIds)) : null;
+                const replaceSnapshot = replaceRequestsQuery ? await getDocs(replaceRequestsQuery) : { docs: [] };
+                
+                const reportStatusMap = new Map();
+                replaceSnapshot.docs.forEach(doc => {
+                    reportStatusMap.set(doc.data().purchaseId, doc.data().status);
+                });
+
+                const activePurchases = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => {
+                    if (p.isRefunded) return false; // Hide refunded mails
+                    if (p.expirationHours && p.purchasedAt) {
+                        const expiryTime = p.purchasedAt.toDate().getTime() + (p.expirationHours * 3600000);
+                        return Date.now() < expiryTime;
+                    }
+                    return true;
+                });
+
+                if(activePurchases.length === 0) {
+                    historyListEl.innerHTML = '<p class="text-center text-gray-600">আপনার কোনো সক্রিয় কেনা মেইল নেই।</p>';
+                } else {
+                    historyListEl.innerHTML = activePurchases.map(purchase => {
+                        const date = purchase.purchasedAt.toDate().toLocaleString();
+                        const fullData = [purchase.mail, purchase.password, purchase.refreshToken, purchase.clientId].filter(Boolean).join('|');
+                        const countdownHtml = purchase.expirationHours ? `<div class="text-xs text-red-500 font-semibold text-right mt-1" data-purchase-id="${purchase.id}" data-purchased-at="${purchase.purchasedAt.toMillis()}" data-expires-in-hours="${purchase.expirationHours}">Expires in: --:--:--</div>` : '';
+                        
+                        const reportStatus = reportStatusMap.get(purchase.id);
+                        let reportButton;
+                        switch (reportStatus) {
+                            case 'approved':
+                                reportButton = `<button class="bg-green-100 text-green-700 text-xs px-3 py-1.5 rounded-md font-semibold flex items-center gap-1" disabled><i data-lucide="check-circle" class="w-3 h-3"></i> Refunded</button>`;
+                                break;
+                            case 'rejected':
+                                reportButton = `<button class="bg-gray-200 text-gray-600 text-xs px-3 py-1.5 rounded-md font-semibold flex items-center gap-1" disabled><i data-lucide="x-circle" class="w-3 h-3"></i> Rejected</button>`;
+                                break;
+                             case 'pending':
+                                reportButton = `<button class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1.5 rounded-md font-semibold flex items-center gap-1" disabled><i data-lucide="hourglass" class="w-3 h-3"></i> Pending</button>`;
+                                break;
+                            default:
+                                reportButton = `<button id="report-btn-${purchase.id}" onclick="showReportForm('${purchase.id}', '${purchase.mailType}', ${purchase.cost}, '${purchase.saleId}')" class="bg-orange-100 text-orange-700 text-xs px-3 py-1.5 rounded-md font-semibold hover:bg-orange-200 flex items-center gap-1"><i data-lucide="shield-alert" class="w-3 h-3"></i> Report Issue</button>`;
+                        }
+                        
+                        return `<div class="card-bg p-4 rounded-xl space-y-3"><div class="flex justify-between items-start"><div><h4 class="font-bold text-lg text-gray-800">${purchase.mailType}</h4><p class="text-xs text-gray-500">${date}</p><p class="text-xs font-mono text-blue-600 mt-1">ID: ${purchase.saleId || 'N/A'}</p></div><div class="flex flex-col items-end gap-2">${reportButton}<button onclick="copyToClipboard('${fullData}', this)" class="bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-md font-semibold hover:bg-gray-200 flex items-center gap-1"><i data-lucide="copy-plus" class="w-3 h-3"></i> FULL COPY</button></div></div><div class="space-y-2 pt-2 border-t"><div class="flex items-center justify-between bg-gray-50 p-2 rounded-md"><span class="text-sm font-medium text-gray-500 mr-2">EMAIL:</span><span class="font-mono text-sm text-gray-800 truncate">${purchase.mail}</span><button onclick="copyToClipboard('${purchase.mail}', this)" class="ml-2 p-1.5 rounded-md hover:bg-gray-200"><i data-lucide="copy" class="w-4 h-4 text-gray-600"></i></button></div><div class="flex items-center justify-between bg-gray-50 p-2 rounded-md"><span class="text-sm font-medium text-gray-500 mr-2">PASS:</span><span class="font-mono text-sm text-gray-800">${purchase.password || 'N/A'}</span><button onclick="copyToClipboard('${purchase.password || ''}', this)" class="ml-2 p-1.5 rounded-md hover:bg-gray-200"><i data-lucide="copy" class="w-4 h-4 text-gray-600"></i></button></div></div>${countdownHtml}</div>`;
+                    }).join('');
+                    startCountdownTimers();
+                }
+                lucide.createIcons();
 
             } catch(e) {
-                 mailListContainer.innerHTML = '<p class="text-center text-red-600">পণ্য লোড করা যায়নি।</p>';
+                 loginMailContainer.innerHTML = '<p class="text-center text-red-600">মেইল লোড করা যায়নি।</p>';
+                 otpMailContainer.innerHTML = '<p class="text-center text-red-600">মেইল লোড করা যায়নি।</p>';
+                 historyListEl.innerHTML = '<p class="text-center text-red-600">হিস্টি লোড করা যায়নি।</p>';
                  console.error(e);
             }
         }
         
-        function startCountdownTimers(containerId, intervalVariable) {
-            if (intervalVariable) clearInterval(intervalVariable);
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            
-            const timerElements = container.querySelectorAll('[data-purchase-id]');
+        function startCountdownTimers() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            const timerElements = document.querySelectorAll('[data-purchase-id]');
             if (timerElements.length === 0) return;
 
-            intervalVariable = setInterval(() => {
+            countdownInterval = setInterval(() => {
                 let hasActiveTimers = false;
                 timerElements.forEach(el => {
                     const expiryTime = parseInt(el.dataset.purchasedAt, 10) + (parseFloat(el.dataset.expiresInHours) * 3600000);
@@ -1571,63 +1353,46 @@
                         el.textContent = `Expires in: ${h}:${m}:${s}`;
                     }
                 });
-                if (!hasActiveTimers) clearInterval(intervalVariable);
+                if (!hasActiveTimers) clearInterval(countdownInterval);
             }, 1000);
-            
-            if(containerId === 'mail-purchase-history') countdownInterval = intervalVariable;
         }
 
-        async function handleDownloadHistory(historyContainerId) {
+        async function handleDownloadHistory() {
             loader.style.display = 'flex';
             try {
                 const q = query(collection(db, "mail_purchases"), where("userId", "==", userData.tgChatId), orderBy("purchasedAt", "desc"));
                 const querySnapshot = await getDocs(q);
-                
                 if (querySnapshot.empty) {
                     loader.style.display = 'none';
                     return showAlert("আপনার কোনো History নেই");
                 }
-                
-                let purchases = querySnapshot.docs.map(doc => doc.data());
-                const dataForExcel = purchases.map(p => ({
-                    'Purchase Date': p.purchasedAt.toDate().toLocaleString(), 'Mail Type': p.mailType, 'Email': p.mail,
-                    'Password': p.password || 'N/A', 'Cost (BDT)': p.cost,
-                    'Full Data': [p.mail, p.password, p.refreshToken, p.clientId].filter(Boolean).join('|')
-                }));
-
-                if (purchases.length === 0) {
-                    loader.style.display = 'none';
-                    return showAlert("এই বিভাগে আপনার কোনো History নেই");
-                }
-                
+                const dataForExcel = querySnapshot.docs.map(doc => { const p = doc.data(); return { 'Purchase Date': p.purchasedAt.toDate().toLocaleString(), 'Mail Type': p.mailType, 'Email': p.mail, 'Password': p.password || 'N/A', 'Cost (BDT)': p.cost, 'Full Data': [p.mail,p.password,p.refreshToken,p.clientId].filter(Boolean).join('|') }; });
                 const ws = XLSX.utils.json_to_sheet(dataForExcel);
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Purchase History");
+                ws['!cols'] = [ {wch: 22}, {wch: 20}, {wch: 30}, {wch: 30}, {wch: 15}, {wch: 70} ];
                 XLSX.writeFile(wb, "My_Purchase_History.xlsx");
             } catch (error) { showAlert("ইতিহাস ডাউনলোড করার সময় একটি সমস্যা হয়েছে।"); }
             finally { loader.style.display = 'none'; }
         }
 
-        async function handleCopyHistory(historyContainerId) {
+        async function handleCopyHistory() {
              loader.style.display = 'flex';
             try {
                 const fourHoursAgo = Timestamp.fromDate(new Date(Date.now() - 4 * 60 * 60 * 1000));
                 const q = query(collection(db, "mail_purchases"), where("userId", "==", userData.tgChatId), where("purchasedAt", ">=", fourHoursAgo), orderBy("purchasedAt", "desc"));
                 const querySnapshot = await getDocs(q);
-                
                 if (querySnapshot.empty) {
                     loader.style.display = 'none';
                     return showAlert("আপনার কোনো হিস্ট্রি পাওয়া যাইনি।");
                 }
-                
-                let purchases = querySnapshot.docs.map(doc => doc.data());
-                const contentToCopy = purchases.map(p => `Mail Type: ${p.mailType}\nEmail: ${p.mail}\nPassword: ${p.password || 'N/A'}`).join('\n\n---\n\n');
+                const contentToCopy = querySnapshot.docs.map(doc => { const p = doc.data(); return `Mail Type: ${p.mailType}\nEmail: ${p.mail}\nPassword: ${p.password || 'N/A'}`; }).join('\n\n---\n\n');
                 copyToClipboard(contentToCopy, null, 'শেষ ৪ ঘণ্টার ইতিহাস কপি করা হয়েছে!');
             } catch (error) { showAlert("Error 404"); console.error(error); }
             finally { loader.style.display = 'none'; }
         }
 
-        window.buyMail = async function(mailType, costParam, stockKey, pageType) {
+        window.buyMail = async function(mailType, costParam, stockKey) {
             const cost = parseFloat(costParam);
             if (!confirm(`আপনি কি ৳${cost.toFixed(2)} দিয়ে একটি ${mailType} কিনতে চান?`)) return;
 
@@ -1638,8 +1403,7 @@
 
             if (mailQuerySnapshot.empty) {
                 loader.style.display = 'none';
-                showAlert("দুঃখিত, এই ধরনের পণ্য বর্তমানে স্টক শেষ।");
-                if (pageType === 'mail') loadMailStore();
+                showAlert("দুঃখিত, এই ধরনের মেইল বর্তমানে স্টক শেষ।");
                 return;
             }
             const mailDocToPurchase = mailQuerySnapshot.docs[0];
@@ -1652,7 +1416,7 @@
                     const counterRef = doc(db, "counters", "mail_purchase");
                     const mailSnap = await transaction.get(mailDocRef);
                     if (!mailSnap.exists() || mailSnap.data().isSold) {
-                        throw new Error("এই পণ্যটি ইতিমধ্যে বিক্রি হয়ে গেছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
+                        throw new Error("এই মেইলটি ইতিমধ্যে বিক্রি হয়ে গেছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
                     }
                     const buyerSnap = await transaction.get(buyerRef);
                     if (!buyerSnap.exists()) throw new Error("আপনার ব্যবহারকারীর তথ্য খুঁজে পাওয়া যায়নি।");
@@ -1696,31 +1460,22 @@
                     
                     const purchaseLogRef = doc(collection(db, "mail_purchases"));
                     const mailConfig = appConfig.mails.find(m => m.stockKey === stockKey);
-                    
-                    const purchaseData = {
+                    transaction.set(purchaseLogRef, {
                         saleId: saleId, userId: userData.tgChatId, paidBy: paidBy, mailType: mailType,
+                        mail: mailData.email, password: mailData.password || null,
+                        refreshToken: mailData.refresh_token || null, clientId: mailData.client_id || null,
                         cost: cost, purchasedAt: serverTimestamp(),
-                        expirationHours: mailConfig ? mailConfig.expirationHours : null,
-                        mail: mailData.email || null,
-                        password: mailData.password || null,
-                        uid: mailData.uid || null,
-                        twoFactor: mailData.twoFactor || null,
-                        refreshToken: mailData.refresh_token || null, 
-                        clientId: mailData.client_id || null
-                    };
-
-                    transaction.set(purchaseLogRef, purchaseData);
+                        expirationHours: mailConfig ? mailConfig.expirationHours : null
+                    });
+                    
                     transaction.update(counterRef, { currentId: saleId + 1 });
                 });
 
-                const modal = document.getElementById('purchase-success-modal');
-                modal.dataset.pageType = pageType;
-                document.getElementById('purchase-success-email').textContent = mailData.email || mailData.uid;
+                document.getElementById('purchase-success-email').textContent = mailData.email;
                 document.getElementById('purchase-success-password').textContent = mailData.password || 'N/A';
-                modal.classList.remove('hidden');
+                document.getElementById('purchase-success-modal').classList.remove('hidden');
                 lucide.createIcons();
-                
-                if (pageType === 'mail') loadMailStore();
+                loadMailStore(); 
                 
                 const finalUserSnap = await getDoc(doc(db, "users", userData.tgChatId));
                 userData = finalUserSnap.data();
@@ -1729,12 +1484,13 @@
             } catch (e) { 
                 showAlert(`কিনতে সমস্যা হয়েছে।\nকারণ: ${e.message}`);
                 console.error("Purchase Transaction Error:", e);
-                if (pageType === 'mail') loadMailStore();
+                loadMailStore(); 
             } finally { 
                 loader.style.display = 'none';
             }
         }
 
+        // [UPDATED] Show Mail Details modal with features
         window.showMailDetails = function(mailType, encodedDetails, encodedFeatures) {
             const details = decodeURIComponent(encodedDetails);
             const features = JSON.parse(decodeURIComponent(encodedFeatures));
@@ -1760,10 +1516,46 @@
             lucide.createIcons();
         }
 
+        window.toggleUpdateContent = (updateId, encodedContent) => {
+            const contentEl = document.getElementById(`update-content-${updateId}`);
+            const buttonEl = contentEl.nextElementSibling;
+            const fullContent = decodeURIComponent(encodedContent);
+            if (buttonEl.innerText === "Read More") {
+                contentEl.innerText = fullContent;
+                buttonEl.innerText = "Show Less";
+            } else {
+                contentEl.innerText = fullContent.substring(0, 120) + '...';
+                buttonEl.innerText = "Read More";
+            }
+        }
+
+        async function loadUpdates() {
+            const updatesContainer = document.getElementById('updates-content');
+            updatesContainer.innerHTML = getLoadingHTML();
+            try {
+                const q = query(collection(db, "updates"), orderBy("createdAt", "desc"), limit(1));
+                const snapshot = await getDocs(q);
+                if (snapshot.empty) return updatesContainer.innerHTML = `<div class="card-bg p-6 rounded-2xl text-center"><h3 class="font-bold text-xl text-gray-800">No new updates right now!</h3><p class="text-gray-600 mt-2">Check back later.</p></div>`;
+
+                const updateDoc = snapshot.docs[0];
+                const update = { id: updateDoc.id, ...updateDoc.data() };
+                const content = update.content || '';
+                const shortContent = content.length > 120 ? content.substring(0, 120) + '...' : content;
+                const encodedContent = encodeURIComponent(content);
+                const date = update.createdAt ? update.createdAt.toDate().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+
+                updatesContainer.innerHTML = `<div class="card-bg rounded-2xl overflow-hidden shadow-lg flex flex-col">${update.imageUrl ? `<img src="${update.imageUrl}" class="w-full aspect-[16/9] object-cover" alt="Update Banner">` : ''}<div class="p-5 space-y-3"><div><h3 class="text-xl font-bold text-gray-800">${update.title}</h3>${date ? `<p class="text-xs text-gray-500 mt-1">${date}</p>` : ''}</div><p id="update-content-${update.id}" class="text-gray-600 text-sm whitespace-pre-wrap leading-relaxed">${shortContent}</p>${content.length > 120 ? `<button onclick="toggleUpdateContent('${update.id}', '${encodedContent}')" class="font-semibold text-blue-600 text-sm hover:underline">Read More</button>` : ''}</div></div>`;
+                lucide.createIcons();
+            } catch(e) {
+                updatesContainer.innerHTML = `<p class="text-center text-red-600">Failed to load updates.</p>`;
+                console.error("Error loading updates:", e);
+            }
+        }
+        
         function populateAdminMailTypes() {
             const selectEl = document.getElementById('mail-type-select');
             selectEl.innerHTML = '<option value="">Select mail type...</option>';
-            (appConfig.mails || []).forEach(mail => { selectEl.innerHTML += `<option value="${mail.stockKey}">${mail.type} (${mail.category || 'login'})</option>`; });
+            (appConfig.mails || []).forEach(mail => { selectEl.innerHTML += `<option value="${mail.stockKey}">${mail.type}</option>`; });
         }
 
         async function handleAddMails() {
@@ -1780,29 +1572,20 @@
                 lines.forEach(line => {
                     const parts = line.trim().split('/');
                     if (parts.length >= 2) { 
-                        const mailConfig = (appConfig.mails || []).find(m => m.stockKey === stockKey);
-                        let data = { isSold: false, createdAt: serverTimestamp() };
-                        if (mailConfig && mailConfig.category === 'social') {
-                            data.uid = parts[0];
-                            data.password = parts[1];
-                            data.twoFactor = parts[2] || null;
-                            data.email = parts[3] || null;
-                        } else {
-                            data.email = parts[0];
-                            data.password = parts[1]; 
-                            data.refresh_token = parts[2] || null;
-                            data.client_id = parts[3] || null;
-                        }
-                        batch.set(doc(collection(db, stockKey)), data);
+                        batch.set(doc(collection(db, stockKey)), { 
+                            email: parts[0], password: parts[1], 
+                            refresh_token: parts[2] || null, client_id: parts[3] || null, 
+                            isSold: false, createdAt: serverTimestamp() 
+                        });
                         addedCount++;
                     }
                 });
                 if (addedCount > 0) {
                     await batch.commit();
-                    showAlert(`Successfully added ${addedCount} new items.`);
+                    showAlert(`Successfully added ${addedCount} new mails.`);
                     document.getElementById('mail-data-textarea').value = '';
-                } else showAlert("No valid items found to add.");
-            } catch (error) { showAlert("An error occurred while adding items."); }
+                } else showAlert("No valid mails found to add.");
+            } catch (error) { showAlert("An error occurred while adding mails."); }
             finally { loader.style.display = 'none'; }
         }
 
@@ -1949,7 +1732,7 @@
             const friend = friendSnap.data();
             if (friend.linkedBy) return searchResultEl.innerHTML = `<p class="text-red-500 text-center mt-2">This user is already in a team.</p>`;
 
-            const profileHTML = friend.photo_url ? `<img src="${friend.photo_url}" class="w-12 h-12 rounded-full object-cover" loading="lazy">` : `<div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center"><span class="text-xl font-bold text-gray-500">${friend.name?.[0] || 'U'}</span></div>`;
+            const profileHTML = friend.photo_url ? `<img src="${friend.photo_url}" class="w-12 h-12 rounded-full object-cover">` : `<div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center"><span class="text-xl font-bold text-gray-500">${friend.name?.[0] || 'U'}</span></div>`;
             searchResultEl.innerHTML = `<div class="bg-gray-50 p-4 rounded-lg mt-4 flex items-center justify-between"><div class="flex items-center gap-3">${profileHTML}<div><p class="font-bold text-gray-800">${friend.name}</p><p class="text-xs text-gray-500">ID: ${friend.tgChatId}</p></div></div><button onclick="confirmLinkFriend('${friend.tgChatId}')" class="btn-gradient px-4 py-2 rounded-lg text-sm">Confirm Link</button></div>`;
             lucide.createIcons();
         }
@@ -1985,7 +1768,7 @@
                 const friend = friendDoc.data();
                 const totalSpent = userData.teamSpending?.[friend.tgChatId] || 0;
                 const isOnline = friend.lastSeen && (Timestamp.now().toMillis() - friend.lastSeen.toMillis()) < 300000;
-                const profileHTML = friend.photo_url ? `<img src="${friend.photo_url}" class="w-12 h-12 rounded-full object-cover" loading="lazy">` : `<div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center"><span class="text-xl font-bold text-gray-500">${(friend.name?.[0] || 'U').toUpperCase()}</span></div>`;
+                const profileHTML = friend.photo_url ? `<img src="${friend.photo_url}" class="w-12 h-12 rounded-full object-cover">` : `<div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center"><span class="text-xl font-bold text-gray-500">${(friend.name?.[0] || 'U').toUpperCase()}</span></div>`;
                 
                 return `<div class="card-bg p-4 rounded-2xl space-y-4 shadow-md"><div class="flex items-center justify-between"><div class="flex items-center gap-4"><div class="relative">${profileHTML}<span title="${isOnline ? 'Active Now' : 'Inactive'}" class="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full ${isOnline ? 'bg-green-500' : 'bg-gray-400'} ring-2 ring-white"></span></div><div><p class="font-bold text-lg text-gray-900">${friend.name}</p><p class="text-sm text-gray-600">Total Spent: <span class="font-semibold text-blue-600">৳${totalSpent.toFixed(2)}</span></p></div></div><button onclick="unlinkFriend('${friend.tgChatId}')" class="p-2 rounded-full hover:bg-red-100 text-red-600 transition-colors" title="Unlink"><i data-lucide="user-x" class="w-5 h-5"></i></button></div></div>`;
             }).join('');
@@ -2003,46 +1786,55 @@
             } catch (e) { showAlert("Failed to unlink friend."); } 
             finally { loader.style.display = 'none'; }
         }
-        
-        function handleFeaturesClick() { navigateTo('features-page'); }
 
-        async function loadReplaceHistory() {
-            const historyList = document.getElementById('replace-history-list');
-            historyList.innerHTML = getLoadingHTML();
+        async function loadTutorials() {
+            const tutorialListEl = document.getElementById('tutorial-list');
+            tutorialListEl.innerHTML = getLoadingHTML();
             try {
-                const q = query(collection(db, "replace_requests"), where("userId", "==", userData.tgChatId), orderBy("requestedAt", "desc"));
-                const snapshot = await getDocs(q);
-                if (snapshot.empty) return historyList.innerHTML = '<p class="text-gray-600 text-center">আপনার কোনো রিপ্লেস হিস্ট্রি নেই।</p>';
-
-                historyList.innerHTML = snapshot.docs.map(doc => {
-                    const item = doc.data();
-                    const statusMap = {
-                        approved: { color: 'text-green-600', text: 'Approved' },
-                        rejected: { color: 'text-red-600', text: 'Rejected' },
-                        pending: { color: 'text-yellow-600', text: 'Pending' }
-                    };
-                    const status = statusMap[item.status] || statusMap.pending;
-                    const date = item.requestedAt ? item.requestedAt.toDate().toLocaleDateString('en-GB') : 'N/A';
-                    
-                    return `<div class="card-bg p-4 rounded-lg space-y-2">
-                        <div class="flex justify-between items-center">
-                            <h4 class="font-semibold text-gray-800">${item.mailType.split(' (ID:')[0]}</h4>
-                            <span class="font-bold ${status.color}">${status.text}</span>
-                        </div>
-                        <div class="text-sm text-gray-600">
-                            <p><strong>ID:</strong> ${item.saleId || 'N/A'}</p>
-                            <p><strong>Cost:</strong> ৳${item.cost.toFixed(2)}</p>
-                            <p><strong>Date:</strong> ${date}</p>
-                        </div>
-                        <p class="text-sm text-gray-700 pt-2 border-t border-gray-200"><strong>Reason:</strong> ${item.reason}</p>
-                    </div>`;
+                const snapshot = await getDocs(query(collection(db, "tutorials"), orderBy("order")));
+                if (snapshot.empty) return tutorialListEl.innerHTML = '<p class="text-center text-gray-600">No tutorials available.</p>';
+                tutorialListEl.innerHTML = snapshot.docs.map(doc => {
+                    const t = doc.data();
+                    const banner = t.bannerImageUrl || 'https://i.postimg.cc/zBp8rCX9/Yellow-Orange-Modern-Marketing-Courses-You-Tube-Thumbnail-20250910-185659-0000.png';
+                    return `<div class="card-bg rounded-xl overflow-hidden shadow-lg transition-transform hover:scale-[1.02] duration-300"><h3 class="font-bold text-lg text-gray-800 p-4 pb-2">${t.title}</h3><a href="${t.youtubeWatchUrl}" target="_blank" class="block group p-4 pt-2"><div class="relative rounded-lg overflow-hidden"><img src="${banner}" alt="${t.title}" class="w-full aspect-video object-cover"><div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-opacity opacity-0 group-hover:opacity-100"><i data-lucide="play-circle" class="w-16 h-16 text-white opacity-80"></i></div></div></a></div>`;
                 }).join('');
                 lucide.createIcons();
-            } catch (error) { 
-                console.error("Error loading replace history:", error);
-                historyList.innerHTML = '<p class="text-red-600 text-center">হিস্ট্রি লোড করা যায়নি।</p>'; 
-            }
+            } catch (e) { tutorialListEl.innerHTML = '<p class="text-center text-red-600">Tutorials could not be loaded.</p>'; }
         }
+
+        async function loadReviews() {
+            const reviewListEl = document.getElementById('reviews-list');
+            reviewListEl.innerHTML = getLoadingHTML();
+            try {
+                const snapshot = await getDocs(query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(5)));
+                if (snapshot.empty) return reviewListEl.innerHTML = '<p class="text-center text-gray-600">No reviews yet.</p>';
+
+                reviewListEl.innerHTML = snapshot.docs.map(doc => {
+                    const review = doc.data();
+                    const stars = Array(5).fill(0).map((_, i) => `<i data-lucide="star" class="w-4 h-4 ${i < review.rating ? 'fill-current' : ''}"></i>`).join('');
+                    const imageUrl = review.imageUrl || `https://ui-avatars.com/api/?name=${review.name.replace(/\s/g, "+")}&background=random`;
+                    return `<div class="review-card-new p-4 rounded-lg"><div class="flex items-start gap-4"><img src="${imageUrl}" class="w-12 h-12 rounded-full object-cover" alt="User"><div class="flex-1"><div class="flex justify-between items-center"><h5 class="font-bold">${review.name}</h5><div class="star-rating flex text-sm">${stars}</div></div><p class="text-gray-600 text-sm mt-1">"${review.reviewText}"</p></div></div></div>`;
+                }).join('');
+                lucide.createIcons();
+            } catch (e) { reviewListEl.innerHTML = '<p class="text-center text-red-600">Reviews could not be loaded.</p>'; }
+        }
+
+        async function loadSupportMenu() {
+            const supportContainer = document.getElementById('support-channels-list');
+            supportContainer.innerHTML = getLoadingHTML();
+            try {
+                const snapshot = await getDocs(query(collection(db, "support_channels"), orderBy("order", "asc")));
+                if (snapshot.empty) return supportContainer.innerHTML = '<p class="p-4 text-center text-gray-600">No support channels available.</p>';
+                supportContainer.innerHTML = snapshot.docs.map(doc => {
+                    const channel = doc.data();
+                    return `<a href="${channel.link}" target="_blank" class="support-link-card"><img src="${channel.iconUrl}" alt="${channel.name} logo"><span>${channel.name}</span></a>`;
+                }).join('');
+            } catch (e) { supportContainer.innerHTML = '<p class="p-4 text-center text-red-600">Support options could not be loaded.</p>'; }
+        }
+
+        function handleFeaturesClick() { navigateTo('features-page'); }
+
+        // --- NEW FUNCTIONS FOR REPLACE/REPORT SYSTEM ---
 
         window.showReportForm = (purchaseId, mailType, cost, saleId) => {
             document.getElementById('report-modal-mail-type').textContent = `${mailType} (ID: ${saleId})`;
@@ -2069,7 +1861,7 @@
                  const requestQuery = query(collection(db, "replace_requests"), where("purchaseId", "==", purchaseId), limit(1));
                  const existingRequest = await getDocs(requestQuery);
                  if (!existingRequest.empty) {
-                     throw new Error("এই পণ্যটির জন্য ইতিমধ্যে একটি অভিযোগ জমা দেওয়া হয়েছে।");
+                     throw new Error("এই মেইলটির জন্য ইতিমধ্যে একটি অভিযোগ জমা দেওয়া হয়েছে।");
                  }
 
                 await addDoc(collection(db, "replace_requests"), {
@@ -2086,9 +1878,7 @@
                 });
                 showAlert("আপনার অভিযোগ সফলভাবে জমা হয়েছে। অ্যাডমিন শীঘ্রই এটি পর্যালোচনা করবেন।");
                 document.getElementById('report-issue-modal').classList.add('hidden');
-                
-                loadMailStore(); 
-
+                loadMailStore(); // Refresh history to show pending status
             } catch (e) {
                 showAlert(`একটি সমস্যা হয়েছে: ${e.message}`);
             } finally {
@@ -2116,8 +1906,8 @@
                         <p class="text-sm"><strong>Reason:</strong> ${req.reason}</p>
                         ${req.proof ? `<p class="text-sm"><strong>Proof:</strong> <a href="${req.proof}" target="_blank" class="text-blue-600 hover:underline">View Proof</a></p>` : ''}
                         <div class="flex justify-end gap-2 pt-2 border-t">
-                            <button onclick="handleRejectRequest('${req.id}', '${req.userId}', '${req.saleId}', '${req.mailType}')" class="px-3 py-1 text-sm font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600">Reject</button>
-                            <button onclick="handleApproveRequest('${req.id}', '${req.userId}', ${req.cost}, '${req.purchaseId}', '${req.saleId}', '${req.mailType}')" class="px-3 py-1 text-sm font-semibold text-white bg-green-500 rounded-lg hover:bg-green-600">Approve (Refund ৳${req.cost})</button>
+                            <button onclick="handleRejectRequest('${req.id}', '${req.userId}')" class="px-3 py-1 text-sm font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600">Reject</button>
+                            <button onclick="handleApproveRequest('${req.id}', '${req.userId}', ${req.cost}, '${req.purchaseId}')" class="px-3 py-1 text-sm font-semibold text-white bg-green-500 rounded-lg hover:bg-green-600">Approve (Refund ৳${req.cost})</button>
                         </div>
                     </div>`;
                 }).join('');
@@ -2126,7 +1916,7 @@
             }
         }
 
-        window.handleApproveRequest = async (requestId, userId, cost, purchaseId, saleId, mailType) => {
+        window.handleApproveRequest = async (requestId, userId, cost, purchaseId) => {
             if (!confirm(`Are you sure you want to approve this request and refund ৳${cost} to user ${userId}?`)) return;
             loader.style.display = 'flex';
             try {
@@ -2142,14 +1932,6 @@
                     transaction.update(userRef, { balance: increment(cost) });
                     transaction.update(purchaseRef, { isRefunded: true });
                 });
-
-                await addDoc(collection(db, "notifications"), {
-                    recipientId: userId,
-                    title: "✅ Report Approved",
-                    message: `Your report for ${mailType.split(' (ID:')[0]} (ID: ${saleId}) has been approved. ৳${cost.toFixed(2)} has been refunded.`,
-                    createdAt: serverTimestamp()
-                });
-
                 showAlert("Request approved and balance refunded successfully.");
                 loadReplaceRequests();
             } catch(e) {
@@ -2159,7 +1941,8 @@
             }
         }
         
-        window.handleRejectRequest = async (requestId, userId, saleId, mailType) => {
+        // [UPDATED] Reject request with penalty logic
+        window.handleRejectRequest = async (requestId, userId) => {
             if (!confirm("Are you sure you want to reject this request? This may trigger a penalty for the user.")) return;
             loader.style.display = 'flex';
             try {
@@ -2186,203 +1969,17 @@
 
                     if (dailyRejections.count >= 5) {
                         updates.isBlocked = true;
-                        updates.blockedUntil = Timestamp.fromMillis(Date.now() + 5 * 60 * 60 * 1000);
+                        updates.blockedUntil = Timestamp.fromMillis(Date.now() + 5 * 60 * 60 * 1000); // 5 hours block
                     }
                     
                     transaction.update(userRef, updates);
                     transaction.update(requestRef, { status: 'rejected', resolvedAt: serverTimestamp() });
                 });
 
-                await addDoc(collection(db, "notifications"), {
-                    recipientId: userId,
-                    title: "❌ Report Rejected",
-                    message: `Your report for ${mailType.split(' (ID:')[0]} (ID: ${saleId}) has been rejected.`,
-                    createdAt: serverTimestamp()
-                });
-
                 showAlert("Request has been rejected. User's rejection count updated.");
                 loadReplaceRequests();
             } catch(e) {
                 showAlert(`Failed to reject request: ${e.message}`);
-            } finally {
-                loader.style.display = 'none';
-            }
-        }
-
-        /* ----- NEW EARN FEATURES JS ----- */
-
-        window.openInstagramSell = function() {
-            const rate = appConfig.instagramRate || 0;
-            document.getElementById('insta-rate-display').textContent = `Rate: ৳${rate} per account`;
-            document.getElementById('instagram-sell-modal').classList.remove('hidden');
-        }
-
-        window.openNavalSell = function() {
-            const targetId = appConfig.navalCoinTargetId || "Admin ID Not Set";
-            document.getElementById('naval-target-id').textContent = targetId;
-            document.getElementById('naval-sell-modal').classList.remove('hidden');
-        }
-
-        window.handleInstagramSubmit = async function() {
-            const username = document.getElementById('insta-username').value.trim();
-            const password = document.getElementById('insta-password').value.trim();
-            const email = document.getElementById('insta-email').value.trim();
-            
-            if(!username || !password) return showAlert("Username and Password are required!");
-            
-            loader.style.display = 'flex';
-            try {
-                // Check Uniqueness for Instagram Username
-                const checkQ = query(collection(db, "earn_requests"), where("type", "==", "instagram"), where("data.username", "==", username));
-                const checkSnap = await getDocs(checkQ);
-                if(!checkSnap.empty) {
-                    loader.style.display = 'none';
-                    return showAlert("এই Instagram Username টি ইতিমধ্যে সাবমিট করা হয়েছে। একবার ব্যবহার করা যাবে।");
-                }
-
-                const rate = appConfig.instagramRate || 0;
-                await addDoc(collection(db, "earn_requests"), {
-                    userId: userData.tgChatId,
-                    userName: userData.name,
-                    type: 'instagram',
-                    data: { username, password, email },
-                    estimatedValue: rate,
-                    status: 'pending',
-                    timestamp: serverTimestamp()
-                });
-                showAlert("Instagram account submitted for review!");
-                document.getElementById('instagram-sell-modal').classList.add('hidden');
-                ['insta-username', 'insta-password', 'insta-email'].forEach(id => document.getElementById(id).value = '');
-            } catch(e) {
-                console.error(e);
-                showAlert("Submission failed.");
-            } finally {
-                loader.style.display = 'none';
-            }
-        }
-
-        window.handleNavalSubmit = async function() {
-            const senderId = document.getElementById('naval-sender-id').value.trim();
-            const amount = parseInt(document.getElementById('naval-amount').value);
-            
-            if(!senderId || !amount || amount <= 0) return showAlert("Please enter valid Sender ID and Amount.");
-            
-            loader.style.display = 'flex';
-            try {
-                // Check Uniqueness for Naval Send ID
-                const checkQ = query(collection(db, "earn_requests"), where("type", "==", "naval_coin"), where("data.senderId", "==", senderId));
-                const checkSnap = await getDocs(checkQ);
-                if(!checkSnap.empty) {
-                    loader.style.display = 'none';
-                    return showAlert("এই Naval Send ID টি ইতিমধ্যে সাবমিট করা হয়েছে। একবার ব্যবহার করা যাবে।");
-                }
-
-                // Rate: 1000 coin = 10 taka => (Amount / 1000) * 10
-                const ratePer1k = appConfig.navalCoinRate || 10; // Default 10 if not set
-                const estimatedValue = (amount / 1000) * ratePer1k;
-
-                await addDoc(collection(db, "earn_requests"), {
-                    userId: userData.tgChatId,
-                    userName: userData.name,
-                    type: 'naval_coin',
-                    data: { senderId, amount },
-                    estimatedValue: estimatedValue,
-                    status: 'pending',
-                    timestamp: serverTimestamp()
-                });
-                showAlert(`Submitted! Estimated Value: ৳${estimatedValue.toFixed(2)}`);
-                document.getElementById('naval-sell-modal').classList.add('hidden');
-                ['naval-sender-id', 'naval-amount'].forEach(id => document.getElementById(id).value = '');
-            } catch(e) {
-                console.error(e);
-                showAlert("Submission failed.");
-            } finally {
-                loader.style.display = 'none';
-            }
-        }
-
-        async function loadEarnRequests() {
-            const listEl = document.getElementById('earn-requests-list');
-            listEl.innerHTML = getLoadingHTML();
-            try {
-                const q = query(collection(db, "earn_requests"), where("status", "==", "pending"), orderBy("timestamp", "desc"));
-                const snapshot = await getDocs(q);
-                if (snapshot.empty) return listEl.innerHTML = '<p class="text-center text-gray-500">No pending earn requests.</p>';
-
-                listEl.innerHTML = snapshot.docs.map(doc => {
-                    const item = { id: doc.id, ...doc.data() };
-                    const date = item.timestamp ? item.timestamp.toDate().toLocaleString() : 'N/A';
-                    let detailsHTML = '';
-                    if(item.type === 'instagram') {
-                        detailsHTML = `<p class="text-xs font-mono bg-gray-100 p-2 rounded mt-1">User: ${item.data.username}<br>Pass: ${item.data.password}<br>Email: ${item.data.email || 'N/A'}</p>`;
-                    } else {
-                        detailsHTML = `<p class="text-xs font-mono bg-gray-100 p-2 rounded mt-1">Sender: ${item.data.senderId}<br>Amount: ${item.data.amount} Coins</p>`;
-                    }
-
-                    return `<div class="card-bg p-4 rounded-lg space-y-2">
-                        <div class="flex justify-between items-center">
-                            <h4 class="font-bold text-gray-800 capitalize">${item.type.replace('_', ' ')}</h4>
-                            <span class="text-xs text-gray-500">${date}</span>
-                        </div>
-                        <p class="text-sm">User: ${item.userName} (${item.userId})</p>
-                        ${detailsHTML}
-                        <p class="text-sm font-bold text-blue-600">Value: ৳${item.estimatedValue.toFixed(2)}</p>
-                        <div class="flex justify-end gap-2 pt-2 border-t">
-                            <button onclick="handleRejectEarn('${item.id}', '${item.userId}')" class="px-3 py-1 text-sm font-semibold text-white bg-red-500 rounded-lg">Reject</button>
-                            <button onclick="handleApproveEarn('${item.id}', '${item.userId}', ${item.estimatedValue})" class="px-3 py-1 text-sm font-semibold text-white bg-green-500 rounded-lg">Approve</button>
-                        </div>
-                    </div>`;
-                }).join('');
-            } catch(e) {
-                console.error(e);
-                listEl.innerHTML = '<p class="text-center text-red-500">Failed to load.</p>';
-            }
-        }
-        window.loadEarnRequests = loadEarnRequests;
-
-        window.handleApproveEarn = async function(docId, userId, amount) {
-            if(!confirm(`Approve and add ৳${amount} to user?`)) return;
-            loader.style.display = 'flex';
-            try {
-                await runTransaction(db, async (transaction) => {
-                    const reqRef = doc(db, "earn_requests", docId);
-                    const userRef = doc(db, "users", userId);
-                    
-                    transaction.update(reqRef, { status: 'approved' });
-                    transaction.update(userRef, { balance: increment(amount) });
-                });
-                
-                await addDoc(collection(db, "notifications"), {
-                    recipientId: userId,
-                    title: "✅ Task Approved",
-                    message: `Your submission has been approved. ৳${amount.toFixed(2)} added to your balance.`,
-                    createdAt: serverTimestamp()
-                });
-
-                showAlert("Approved successfully!");
-                loadEarnRequests();
-            } catch(e) {
-                showAlert("Error approving.");
-            } finally {
-                loader.style.display = 'none';
-            }
-        }
-
-        window.handleRejectEarn = async function(docId, userId) {
-            if(!confirm("Reject this submission?")) return;
-            loader.style.display = 'flex';
-            try {
-                await updateDoc(doc(db, "earn_requests", docId), { status: 'rejected' });
-                await addDoc(collection(db, "notifications"), {
-                    recipientId: userId,
-                    title: "❌ Task Rejected",
-                    message: `Your submission was rejected by admin.`,
-                    createdAt: serverTimestamp()
-                });
-                showAlert("Rejected.");
-                loadEarnRequests();
-            } catch(e) {
-                showAlert("Error rejecting.");
             } finally {
                 loader.style.display = 'none';
             }
